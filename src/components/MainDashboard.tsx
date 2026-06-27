@@ -13,7 +13,6 @@ import { id } from '../i18n/id';
 import { en } from '../i18n/en';
 import { RecentlyViewed } from './RecentlyViewed';
 
-const AboutModal = lazy(() => import('./AboutModal').then(m => ({ default: m.AboutModal })));
 const InstallPWABanner = lazy(() => import('./InstallPWABanner').then(m => ({ default: m.InstallPWABanner })));
 const OnboardingTour = lazy(() => import('./OnboardingTour').then(m => ({ default: m.OnboardingTour })));
 
@@ -30,7 +29,6 @@ export const MainDashboard = memo(() => {
         animate={{ opacity: 1, y: 0 }} 
         transition={{ duration: isMobile ? 0.3 : 0.5 }}
       >
-        {/* Optimisasi Spasi & Ukuran Teks Khusus Mobile */}
         <div className="text-center mb-5 sm:mb-8 pt-2 sm:pt-4">
           <h1 className={`text-xl sm:text-4xl font-black tracking-tight mb-1.5 sm:mb-3 ${isDark ? 'text-white' : 'text-slate-900'}`}>
             {t.appTitle}
@@ -82,7 +80,6 @@ export const MainDashboard = memo(() => {
       </AnimatePresence>
 
       <Suspense fallback={null}>
-        <AboutModal />
         <InstallPWABanner />
         <OnboardingTour />
       </Suspense>

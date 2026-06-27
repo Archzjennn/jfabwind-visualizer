@@ -15,6 +15,7 @@ const RegexBuilder = lazy(() => import('./components/RegexBuilder').then(m => ({
 const QuizModal = lazy(() => import('./components/QuizModal').then(m => ({ default: m.QuizModal })));
 const GlossaryModal = lazy(() => import('./components/GlossaryModal').then(m => ({ default: m.GlossaryModal })));
 const SettingsModal = lazy(() => import('./components/SettingsModal').then(m => ({ default: m.SettingsModal })));
+const AboutModal = lazy(() => import('./components/AboutModal').then(m => ({ default: m.AboutModal })));
 const ShortcutsModal = lazy(() => import('./components/ShortcutsModal').then(m => ({ default: m.ShortcutsModal })));
 
 const FallbackSpinner = () => (
@@ -102,6 +103,7 @@ const AppLayout = () => {
         <QuizModal />
         <GlossaryModal />
         <SettingsModal />
+        <AboutModal />
         {!isMobile && <ShortcutsModal />}
       </Suspense>
       <Toast />

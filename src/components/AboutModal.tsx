@@ -29,14 +29,27 @@ export const AboutModal = () => {
   return (
     <AnimatePresence>
       {isAboutOpen && (
-        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-6">
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={closeAbout} className="absolute inset-0 bg-black/70 backdrop-blur-md" />
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-[999] flex items-center justify-center p-4 sm:p-6"
+        >
+          <motion.div 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            exit={{ opacity: 0 }} 
+            onClick={closeAbout} 
+            className="absolute inset-0 bg-black/70 backdrop-blur-md" 
+          />
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            className={`relative z-[210] w-full max-w-5xl max-h-[90vh] overflow-y-auto custom-scrollbar border rounded-3xl shadow-2xl ${isDark ? 'bg-[#080810]' : 'bg-white'} ${isDark ? 'border-white/10 shadow-black' : 'border-slate-200 shadow-slate-300/50'}`}
+            initial={{ opacity: 0, scale: 0.95, y: 20 }} 
+            animate={{ opacity: 1, scale: 1, y: 0 }} 
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            transition={{ type: "spring", duration: 0.5, bounce: 0.15 }}
+            className={`relative z-10 w-full max-w-5xl max-h-[90vh] overflow-y-auto custom-scrollbar border rounded-3xl shadow-2xl ${isDark ? 'bg-[#080810]' : 'bg-white'} ${isDark ? 'border-white/10 shadow-black' : 'border-slate-200 shadow-slate-300/50'}`}
           >
-            {/* TINGGI BANNER DISESUAIKAN (h-24 pada mobile, h-36 pada tablet, h-40 pada desktop) */}
             <div className="relative h-24 sm:h-36 md:h-40 shrink-0 group">
               <div className="absolute inset-0 rounded-t-3xl overflow-hidden">
                 <img 
@@ -137,7 +150,7 @@ export const AboutModal = () => {
               </div>
             </div>
           </motion.div>
-        </div>
+        </motion.div>
       )}
     </AnimatePresence>
   );
