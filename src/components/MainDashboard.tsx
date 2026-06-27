@@ -14,7 +14,6 @@ import { en } from '../i18n/en';
 import { RecentlyViewed } from './RecentlyViewed';
 
 const AboutModal = lazy(() => import('./AboutModal').then(m => ({ default: m.AboutModal })));
-const ShortcutsModal = lazy(() => import('./ShortcutsModal').then(m => ({ default: m.ShortcutsModal })));
 const InstallPWABanner = lazy(() => import('./InstallPWABanner').then(m => ({ default: m.InstallPWABanner })));
 const OnboardingTour = lazy(() => import('./OnboardingTour').then(m => ({ default: m.OnboardingTour })));
 
@@ -22,15 +21,21 @@ export const MainDashboard = memo(() => {
   const { nfa, dfa, lang, theme } = useStore();
   const t = lang === 'id' ? id : en;
   const isDark = theme === 'dark';
+  const isMobile = window.innerWidth < 768;
 
   return (
-    <div className={`transition-colors duration-300 w-full`}>
-      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-        <div className="text-center mb-8 pt-4">
-          <h1 className={`text-3xl sm:text-4xl font-black tracking-tight mb-3 ${isDark ? 'text-white' : 'text-slate-900'}`}>
+    <div className="transition-colors duration-300 w-full">
+      <motion.div 
+        initial={{ opacity: 0, y: isMobile ? 0 : -20 }} 
+        animate={{ opacity: 1, y: 0 }} 
+        transition={{ duration: isMobile ? 0.3 : 0.5 }}
+      >
+        {/* Optimisasi Spasi & Ukuran Teks Khusus Mobile */}
+        <div className="text-center mb-5 sm:mb-8 pt-2 sm:pt-4">
+          <h1 className={`text-xl sm:text-4xl font-black tracking-tight mb-1.5 sm:mb-3 ${isDark ? 'text-white' : 'text-slate-900'}`}>
             {t.appTitle}
           </h1>
-          <p className={`max-w-2xl mx-auto text-sm sm:text-base px-4 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+          <p className={`max-w-2xl mx-auto text-xs sm:text-base px-4 leading-relaxed ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
             {t.appDesc}
           </p>
         </div>
@@ -43,8 +48,13 @@ export const MainDashboard = memo(() => {
 
       <AnimatePresence>
         {nfa && dfa && (
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 20 }} transition={{ duration: 0.5, delay: 0.1 }} className="space-y-6 pb-12 mt-8">
-            
+          <motion.div 
+            initial={{ opacity: 0, y: isMobile ? 0 : 20 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            exit={{ opacity: 0, y: isMobile ? 0 : 20 }} 
+            transition={{ duration: isMobile ? 0.3 : 0.5, delay: isMobile ? 0 : 0.1 }} 
+            className="space-y-6 pb-12 mt-8"
+          >
             {/* TINGKAT 1: VISUALISASI GRAFIK */}
             <div id="visual-section" className="grid grid-cols-1 xl:grid-cols-2 gap-6">
               <AutomataGraph automaton={nfa} title={t.graphNfa} />
@@ -73,7 +83,6 @@ export const MainDashboard = memo(() => {
 
       <Suspense fallback={null}>
         <AboutModal />
-        <ShortcutsModal />
         <InstallPWABanner />
         <OnboardingTour />
       </Suspense>

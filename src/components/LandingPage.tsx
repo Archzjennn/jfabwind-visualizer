@@ -52,7 +52,7 @@ export const LandingPage = () => {
       iconColor: 'text-sky-500',
       title: lang === 'id' ? 'Tabel Transisi Otomatis' : 'Automatic Transition Table',
       desc: lang === 'id'
-        ? 'Matriks transisi terbentuk otomatis dan sinkron dengan visualisasi graf secara real-time.'
+        ? 'Tabel transisi terbentuk otomatis dan sinkron dengan visualisasi graf secara real-time.'
         : 'Transition matrices auto-generated and synchronized with live graph visualization.'
     },
     {
@@ -168,51 +168,51 @@ export const LandingPage = () => {
   };
 
   return (
-    <div className={`min-h-screen font-sans selection:bg-violet-500 selection:text-white transition-colors duration-300 ${isDark ? 'bg-[#080810]' : 'bg-slate-50 text-slate-900'}`}>
+    <div className={`min-h-screen w-full overflow-x-hidden font-sans selection:bg-violet-500 selection:text-white transition-colors duration-300 ${isDark ? 'bg-[#080810]' : 'bg-slate-50 text-slate-900'}`}>
 
       <motion.div
         style={{ scaleX }}
         className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-violet-500 via-pink-500 to-sky-500 origin-left z-50"
       />
 
-      <nav className={`fixed top-0 left-0 right-0 z-40 px-6 py-4 transition-colors duration-300 ${isDark ? 'bg-[#080810]/80 border-b border-white/5' : 'bg-slate-50/80 border-b border-slate-200/80'} backdrop-blur-xl`}>
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
+      <nav className={`fixed top-0 left-0 right-0 z-40 px-4 sm:px-6 py-4 transition-colors duration-300 ${isDark ? 'bg-[#080810]/90 border-b border-white/5' : 'bg-slate-50/90 border-b border-slate-200/80'} sm:backdrop-blur-xl`}>
+        <div className="max-w-6xl mx-auto flex items-center justify-between gap-2">
           
-          <div className="flex items-center gap-3 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            <div className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 rounded-xl overflow-hidden flex items-center justify-center">
+          <div className="flex items-center gap-2 sm:gap-3 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+            <div className="w-9 h-9 sm:w-12 sm:h-12 flex-shrink-0 rounded-xl overflow-hidden flex items-center justify-center">
               <img 
-                src={isDark ? "/LogoJFABWIND.png" : "/LogoJFABWIND.png"} 
+                src="/LogoJFABWIND.png" 
                 alt="JFABWIND Logo" 
                 className="w-full h-full object-contain drop-shadow-sm" 
               />
             </div>
             
             <div className="flex flex-col">
-              <span className={`font-black text-base tracking-[0.15em] ${isDark ? 'text-white' : 'text-slate-900'}`}>JFABWIND</span>
-              <span className={`text-[9px] tracking-[0.2em] uppercase font-medium ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>
-                {lang === 'id' ? 'Joint Finite Automata Builder With Interactive NFA/DFA' : 'Joint Finite Automata Builder With Interactive NFA/DFA'}
+              <span className={`font-black text-sm sm:text-base tracking-[0.15em] ${isDark ? 'text-white' : 'text-slate-900'}`}>JFABWIND</span>
+              <span className={`text-[9px] tracking-[0.2em] uppercase font-medium hidden sm:block ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>
+                Joint Finite Automata Builder With Interactive NFA/DFA
               </span>
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2">
             <button
               onClick={toggleLang}
-              className={`px-3 py-1.5 rounded-lg text-xs font-bold tracking-widest transition-colors ${isDark ? 'hover:bg-white/8 text-slate-400 hover:text-white border border-white/8' : 'hover:bg-slate-100 text-slate-500 hover:text-slate-900 border border-slate-200'}`}
+              className={`px-2 py-1.5 sm:px-3 sm:py-1.5 rounded-lg text-[10px] sm:text-xs font-bold tracking-widest transition-colors ${isDark ? 'hover:bg-white/8 text-slate-400 hover:text-white border border-white/8' : 'hover:bg-slate-100 text-slate-500 hover:text-slate-900 border border-slate-200'}`}
             >
-              <span className="flex items-center gap-1.5"><Languages className="w-3.5 h-3.5" />{lang.toUpperCase()}</span>
+              <span className="flex items-center gap-1"><Languages className="w-3.5 h-3.5" />{lang.toUpperCase()}</span>
             </button>
             <button
               onClick={toggleTheme}
-              className={`p-2 rounded-lg transition-colors ${isDark ? 'hover:bg-white/8 text-slate-400 hover:text-white border border-white/8' : 'hover:bg-slate-100 text-slate-500 hover:text-slate-800 border border-slate-200'}`}
+              className={`p-1.5 sm:p-2 rounded-lg transition-colors ${isDark ? 'hover:bg-white/8 text-slate-400 hover:text-white border border-white/8' : 'hover:bg-slate-100 text-slate-500 hover:text-slate-800 border border-slate-200'}`}
             >
               {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </button>
             <button
               onClick={() => navigate('/app')}
-              className="px-4 py-2 text-xs font-bold uppercase tracking-wider bg-violet-600 hover:bg-violet-500 text-white rounded-lg transition-all active:scale-95 shadow-lg shadow-violet-500/20"
+              className="px-3 py-1.5 sm:px-4 sm:py-2 text-[10px] sm:text-xs font-bold uppercase tracking-wider bg-violet-600 hover:bg-violet-500 text-white rounded-lg transition-all active:scale-95 shadow-lg shadow-violet-500/20"
             >
-              Launch App
+              Launch
             </button>
           </div>
         </div>
@@ -220,10 +220,10 @@ export const LandingPage = () => {
 
       <section
         ref={heroRef}
-        className={`relative min-h-screen flex flex-col justify-center items-center px-6 pt-24 pb-16 overflow-hidden ${isDark ? 'bg-[#080810]' : 'bg-slate-50'}`}
+        className={`relative min-h-screen flex flex-col justify-center items-center px-4 sm:px-6 pt-24 pb-16 overflow-hidden ${isDark ? 'bg-[#080810]' : 'bg-slate-50'}`}
       >
         <div
-          className="absolute inset-0 pointer-events-none"
+          className="absolute inset-0 pointer-events-none hidden sm:block"
           style={{
             backgroundImage: isDark
               ? 'linear-gradient(rgba(124,58,237,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(124,58,237,0.04) 1px, transparent 1px)'
@@ -231,14 +231,13 @@ export const LandingPage = () => {
             backgroundSize: '64px 64px'
           }}
         />
-        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full blur-[120px] pointer-events-none ${isDark ? 'bg-violet-600/10' : 'bg-violet-400/10'}`} />
-
-        <div className="max-w-3xl mx-auto text-center z-10">
+        
+        <div className="max-w-3xl mx-auto text-center z-10 px-2">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={heroInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-semibold tracking-widest uppercase mb-8 border ${isDark ? 'bg-violet-500/8 border-violet-500/20 text-violet-400' : 'bg-violet-50 border-violet-200 text-violet-600'}`}
+            transition={{ duration: 0.5 }}
+            className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-semibold tracking-widest uppercase mb-6 sm:mb-8 border ${isDark ? 'bg-violet-500/8 border-violet-500/20 text-violet-400' : 'bg-violet-50 border-violet-200 text-violet-600'}`}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-violet-500 animate-pulse" />
             {lang === 'id' ? 'Teori Bahasa & Automata — Tools Interaktif' : 'Formal Language & Automata Theory — Interactive Tool'}
@@ -247,8 +246,8 @@ export const LandingPage = () => {
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={heroInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className={`text-5xl sm:text-7xl font-black tracking-tight mb-3 ${isDark ? 'text-white' : 'text-slate-900'}`}
+            transition={{ duration: 0.5, delay: 0.05 }}
+            className={`text-4xl sm:text-7xl font-black tracking-tight mb-2 sm:mb-3 ${isDark ? 'text-white' : 'text-slate-900'}`}
           >
             JFABWIND
           </motion.h1>
@@ -256,8 +255,8 @@ export const LandingPage = () => {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={heroInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.15 }}
-            className={`text-[11px] tracking-[0.25em] uppercase font-medium mb-8 ${isDark ? 'text-slate-500' : 'text-slate-400'}`}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className={`text-[9px] sm:text-[11px] tracking-[0.15em] sm:tracking-[0.25em] uppercase font-medium mb-6 sm:mb-8 ${isDark ? 'text-slate-500' : 'text-slate-400'}`}
           >
             Joint Finite Automata Builder With Interactive NFA/DFA
           </motion.p>
@@ -265,8 +264,8 @@ export const LandingPage = () => {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={heroInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className={`text-lg sm:text-xl font-medium mb-3 max-w-xl mx-auto leading-relaxed ${isDark ? 'text-slate-200' : 'text-slate-700'}`}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            className={`text-base sm:text-xl font-medium mb-3 max-w-xl mx-auto leading-relaxed ${isDark ? 'text-slate-200' : 'text-slate-700'}`}
           >
             {lang === 'id'
               ? 'Visualisasi Regex, NFA, dan DFA secara interaktif'
@@ -276,8 +275,8 @@ export const LandingPage = () => {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={heroInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.25 }}
-            className={`text-sm mb-10 max-w-md mx-auto ${isDark ? 'text-slate-500' : 'text-slate-400'}`}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className={`text-xs sm:text-sm mb-8 sm:mb-10 max-w-md mx-auto ${isDark ? 'text-slate-500' : 'text-slate-400'}`}
           >
             {lang === 'id'
               ? 'Platform edukasi automata yang membantu memahami konsep formal language melalui visualisasi langsung.'
@@ -287,30 +286,31 @@ export const LandingPage = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={heroInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            transition={{ duration: 0.5, delay: 0.25 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-3"
           >
             <button
               onClick={() => navigate('/app')}
-              className="w-full sm:w-auto px-7 py-3 bg-violet-600 hover:bg-violet-500 text-white font-bold rounded-lg transition-all shadow-lg shadow-violet-500/20 hover:shadow-violet-500/30 flex items-center justify-center gap-2 group active:scale-95 text-sm"
+              className="w-full sm:w-auto px-7 py-3 bg-violet-600 hover:bg-violet-500 text-white font-bold rounded-lg transition-all shadow-lg shadow-violet-500/20 hover:shadow-violet-500/30 flex items-center justify-center gap-2 group active:scale-95 text-xs sm:text-sm"
             >
               {lang === 'id' ? 'Buka Aplikasi' : 'Launch App'}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </button>
             <button
               onClick={() => document.getElementById('features-section')?.scrollIntoView({ behavior: 'smooth' })}
-              className={`w-full sm:w-auto px-7 py-3 font-bold rounded-lg border transition-all flex items-center justify-center gap-2 active:scale-95 text-sm ${isDark ? 'bg-white/4 hover:bg-white/8 text-slate-200 border-white/10 hover:border-white/20' : 'bg-white hover:bg-slate-50 text-slate-700 border-slate-200 hover:border-slate-300'}`}
+              className={`w-full sm:w-auto px-7 py-3 font-bold rounded-lg border transition-all flex items-center justify-center gap-2 active:scale-95 text-xs sm:text-sm ${isDark ? 'bg-white/4 hover:bg-white/8 text-slate-200 border-white/10 hover:border-white/20' : 'bg-white hover:bg-slate-50 text-slate-700 border-slate-200 hover:border-slate-300'}`}
             >
               {lang === 'id' ? 'Lihat Fitur' : 'View Features'}
             </button>
           </motion.div>
         </div>
 
+        {/* PERBAIKAN: Menghilangkan tabrakan properti display CSS antara flex dan hidden */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
-          className="absolute bottom-8 flex flex-col items-center gap-2 cursor-pointer"
+          className="absolute bottom-8 hidden sm:flex sm:flex-col sm:items-center sm:gap-2 cursor-pointer"
           onClick={() => document.getElementById('features-section')?.scrollIntoView({ behavior: 'smooth' })}
         >
           <div className={`w-px h-10 overflow-hidden ${isDark ? 'bg-white/10' : 'bg-slate-200'}`}>
@@ -326,14 +326,14 @@ export const LandingPage = () => {
       <section
         id="features-section"
         ref={featuresRef}
-        className={`py-24 px-6 ${isDark ? 'bg-[#080810] border-t border-white/5' : 'bg-white border-t border-slate-100'}`}
+        className={`py-14 sm:py-24 px-4 sm:px-6 ${isDark ? 'bg-[#080810]' : 'bg-white'}`}
       >
         <div className="max-w-6xl mx-auto">
-          <div className="mb-16">
+          <div className="mb-10 sm:mb-16">
             <motion.p
               initial={{ opacity: 0, y: 16 }}
               animate={featuresInView ? { opacity: 1, y: 0 } : {}}
-              className={`text-[11px] font-bold tracking-[0.2em] uppercase mb-3 ${isDark ? 'text-violet-400' : 'text-violet-600'}`}
+              className={`text-[11px] font-bold tracking-[0.2em] uppercase mb-2 sm:mb-3 ${isDark ? 'text-violet-400' : 'text-violet-600'}`}
             >
               {lang === 'id' ? 'Fitur Platform' : 'Platform Features'}
             </motion.p>
@@ -341,7 +341,7 @@ export const LandingPage = () => {
               initial={{ opacity: 0, y: 16 }}
               animate={featuresInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.05 }}
-              className={`text-3xl sm:text-4xl font-black tracking-tight mb-4 ${isDark ? 'text-white' : 'text-slate-900'}`}
+              className={`text-2xl sm:text-4xl font-black tracking-tight mb-3 sm:mb-4 ${isDark ? 'text-white' : 'text-slate-900'}`}
             >
               {lang === 'id' ? 'Semua yang kamu butuhkan' : 'Everything you need'}
             </motion.h2>
@@ -349,7 +349,7 @@ export const LandingPage = () => {
               initial={{ opacity: 0, y: 16 }}
               animate={featuresInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.1 }}
-              className={`text-sm max-w-lg ${isDark ? 'text-slate-400' : 'text-slate-500'}`}
+              className={`text-xs sm:text-sm max-w-lg ${isDark ? 'text-slate-400' : 'text-slate-500'}`}
             >
               {lang === 'id'
                 ? 'Modul lengkap yang dirancang untuk memudahkan pemahaman komputasi teori formal.'
@@ -357,20 +357,20 @@ export const LandingPage = () => {
             </motion.p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             {features.map((feat, idx) => (
               <motion.div
                 key={idx}
                 initial={{ opacity: 0, y: 24 }}
                 animate={featuresInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: idx * 0.07 }}
-                className={`p-5 rounded-xl border transition-all duration-200 group ${isDark ? 'bg-white/2 border-white/6 hover:border-white/12 hover:bg-white/4' : 'bg-slate-50 border-slate-100 hover:border-slate-200 hover:bg-white'}`}
+                transition={{ duration: 0.4, delay: idx * 0.05 }}
+                className={`p-4 sm:p-5 rounded-xl border transition-all duration-200 group ${isDark ? 'bg-white/2 border-white/6 hover:border-white/12 hover:bg-white/4' : 'bg-slate-50 border-slate-100 hover:border-slate-200 hover:bg-white'}`}
               >
-                <div className={`w-10 h-10 rounded-lg ${feat.bg} border ${feat.border} flex items-center justify-center mb-4 ${feat.iconColor}`}>
+                <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-lg ${feat.bg} border ${feat.border} flex items-center justify-center mb-3 sm:mb-4 ${feat.iconColor}`}>
                   {feat.icon}
                 </div>
-                <h3 className={`font-bold text-sm mb-1.5 ${isDark ? 'text-white' : 'text-slate-900'}`}>{feat.title}</h3>
-                <p className={`text-xs leading-relaxed ${isDark ? 'text-slate-500' : 'text-slate-500'}`}>{feat.desc}</p>
+                <h3 className={`font-bold text-xs sm:text-sm mb-1 sm:mb-1.5 ${isDark ? 'text-white' : 'text-slate-900'}`}>{feat.title}</h3>
+                <p className={`text-[11px] sm:text-xs leading-relaxed ${isDark ? 'text-slate-500' : 'text-slate-500'}`}>{feat.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -379,14 +379,14 @@ export const LandingPage = () => {
 
       <section
         ref={howItWorksRef}
-        className={`py-24 px-6 ${isDark ? 'bg-[#080810] border-t border-white/5' : 'bg-slate-50 border-t border-slate-100'}`}
+        className={`py-14 sm:py-24 px-4 sm:px-6 ${isDark ? 'bg-[#080810] border-t border-white/5' : 'bg-slate-50 border-t border-slate-100'}`}
       >
         <div className="max-w-6xl mx-auto">
-          <div className="mb-16">
+          <div className="mb-10 sm:mb-16">
             <motion.p
               initial={{ opacity: 0, y: 16 }}
               animate={howItWorksInView ? { opacity: 1, y: 0 } : {}}
-              className={`text-[11px] font-bold tracking-[0.2em] uppercase mb-3 ${isDark ? 'text-violet-400' : 'text-violet-600'}`}
+              className={`text-[11px] font-bold tracking-[0.2em] uppercase mb-2 sm:mb-3 ${isDark ? 'text-violet-400' : 'text-violet-600'}`}
             >
               {lang === 'id' ? 'Alur Kerja' : 'Workflow'}
             </motion.p>
@@ -394,7 +394,7 @@ export const LandingPage = () => {
               initial={{ opacity: 0, y: 16 }}
               animate={howItWorksInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.05 }}
-              className={`text-3xl sm:text-4xl font-black tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}
+              className={`text-2xl sm:text-4xl font-black tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}
             >
               {lang === 'id' ? 'Tiga langkah sederhana' : 'Three simple steps'}
             </motion.h2>
@@ -408,23 +408,23 @@ export const LandingPage = () => {
               />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
               {steps.map((step, idx) => (
                 <motion.div
                   key={idx}
                   initial={{ opacity: 0, y: 24 }}
                   animate={howItWorksInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.5, delay: idx * 0.15 }}
+                  transition={{ duration: 0.4, delay: idx * 0.1 }}
                   className="relative"
                 >
-                  <div className={`w-12 h-12 rounded-xl border flex items-center justify-center mb-6 font-black font-mono text-lg relative z-10 ${isDark ? 'bg-[#080810]' : 'bg-slate-50'} ${accentColors[step.accent]}`}>
+                  <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl border flex items-center justify-center mb-4 sm:mb-6 font-black font-mono text-base sm:text-lg relative z-10 ${isDark ? 'bg-[#080810]' : 'bg-slate-50'} ${accentColors[step.accent]}`}>
                     {step.num}
                   </div>
-                  <p className={`text-[10px] font-bold tracking-[0.2em] uppercase mb-2 ${numColors[step.accent]}`}>
+                  <p className={`text-[9px] sm:text-[10px] font-bold tracking-[0.2em] uppercase mb-1 sm:mb-2 ${numColors[step.accent]}`}>
                     {step.label}
                   </p>
-                  <h3 className={`text-lg font-bold mb-2 ${isDark ? 'text-white' : 'text-slate-900'}`}>{step.title}</h3>
-                  <p className={`text-sm leading-relaxed ${isDark ? 'text-slate-500' : 'text-slate-500'}`}>{step.desc}</p>
+                  <h3 className={`text-base sm:text-lg font-bold mb-1 sm:mb-2 ${isDark ? 'text-white' : 'text-slate-900'}`}>{step.title}</h3>
+                  <p className={`text-xs sm:text-sm leading-relaxed ${isDark ? 'text-slate-500' : 'text-slate-500'}`}>{step.desc}</p>
                 </motion.div>
               ))}
             </div>
@@ -434,24 +434,24 @@ export const LandingPage = () => {
 
       <section
         ref={techRef}
-        className={`py-20 px-6 ${isDark ? 'bg-[#080810] border-t border-white/5' : 'bg-white border-t border-slate-100'}`}
+        className={`py-14 sm:py-20 px-4 sm:px-6 ${isDark ? 'bg-[#080810] border-t border-white/5' : 'bg-white border-t border-slate-100'}`}
       >
         <div className="max-w-6xl mx-auto">
           <motion.p
             initial={{ opacity: 0 }}
             animate={techInView ? { opacity: 1 } : {}}
-            className={`text-[11px] font-bold tracking-[0.2em] uppercase mb-6 text-center ${isDark ? 'text-slate-600' : 'text-slate-400'}`}
+            className={`text-[11px] font-bold tracking-[0.2em] uppercase mb-4 sm:mb-6 text-center ${isDark ? 'text-slate-600' : 'text-slate-400'}`}
           >
             {lang === 'id' ? 'Dibangun dengan' : 'Built with'}
           </motion.p>
-          <div className="flex flex-wrap items-center justify-center gap-3">
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
             {techs.map((tech, idx) => (
               <motion.div
                 key={idx}
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={techInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.3, delay: idx * 0.04 }}
-                className={`px-4 py-2 rounded-lg border text-xs font-mono font-semibold transition-colors cursor-default ${isDark ? 'bg-white/2 border-white/6 text-slate-400 hover:text-slate-200 hover:border-white/12' : 'bg-slate-50 border-slate-200 text-slate-500 hover:text-slate-700 hover:border-slate-300'}`}
+                transition={{ duration: 0.25, delay: idx * 0.03 }}
+                className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg border text-[11px] sm:text-xs font-mono font-semibold transition-colors cursor-default ${isDark ? 'bg-white/2 border-white/6 text-slate-400 hover:text-slate-200 hover:border-white/12' : 'bg-slate-50 border-slate-200 text-slate-500 hover:text-slate-700 hover:border-slate-300'}`}
               >
                 {tech}
               </motion.div>
@@ -460,13 +460,13 @@ export const LandingPage = () => {
         </div>
       </section>
 
-      <section className={`py-24 px-6 ${isDark ? 'bg-[#080810] border-t border-white/5' : 'bg-slate-50 border-t border-slate-100'}`}>
-        <div className="max-w-2xl mx-auto text-center">
+      <section className={`py-14 sm:py-24 px-4 sm:px-6 ${isDark ? 'bg-[#080810] border-t border-white/5' : 'bg-slate-50 border-t border-slate-100'}`}>
+        <div className="max-w-2xl mx-auto text-center px-2">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className={`text-3xl sm:text-4xl font-black tracking-tight mb-4 ${isDark ? 'text-white' : 'text-slate-900'}`}
+            className={`text-2xl sm:text-4xl font-black tracking-tight mb-3 sm:mb-4 ${isDark ? 'text-white' : 'text-slate-900'}`}
           >
             {lang === 'id' ? 'Siap untuk mencoba?' : 'Ready to get started?'}
           </motion.h2>
@@ -475,7 +475,7 @@ export const LandingPage = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.05 }}
-            className={`text-sm mb-8 ${isDark ? 'text-slate-500' : 'text-slate-400'}`}
+            className={`text-xs sm:text-sm mb-6 sm:mb-8 ${isDark ? 'text-slate-500' : 'text-slate-400'}`}
           >
             {lang === 'id'
               ? 'Buka aplikasi dan mulai eksplorasi automata secara visual.'
@@ -487,7 +487,7 @@ export const LandingPage = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
             onClick={() => navigate('/app')}
-            className="px-8 py-3.5 bg-violet-600 hover:bg-violet-500 text-white font-bold rounded-lg transition-all shadow-lg shadow-violet-500/20 hover:shadow-violet-500/30 flex items-center gap-2 mx-auto group active:scale-95 text-sm"
+            className="px-7 py-3 bg-violet-600 hover:bg-violet-500 text-white font-bold rounded-lg transition-all shadow-lg shadow-violet-500/20 hover:shadow-violet-500/30 flex items-center gap-2 mx-auto group active:scale-95 text-xs sm:text-sm"
           >
             {lang === 'id' ? 'Buka Aplikasi' : 'Launch App'}
             <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
@@ -495,24 +495,24 @@ export const LandingPage = () => {
         </div>
       </section>
 
-      <footer className={`px-6 py-8 border-t ${isDark ? 'bg-[#080810] border-white/5' : 'bg-white border-slate-100'}`}>
+      <footer className={`px-4 sm:px-6 py-6 sm:py-8 border-t mb-12 sm:mb-0 ${isDark ? 'bg-[#080810] border-white/5' : 'bg-white border-slate-100'}`}>
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex flex-col items-start">
+          <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
             <span className={`font-black text-sm tracking-[0.15em] ${isDark ? 'text-white' : 'text-slate-900'}`}>JFABWIND</span>
-            <span className={`text-[10px] tracking-wider ${isDark ? 'text-slate-600' : 'text-slate-400'}`}>
+            <span className={`text-[9px] tracking-wider hidden sm:block ${isDark ? 'text-slate-600' : 'text-slate-400'}`}>
               Joint Finite Automata Builder With Interactive NFA/DFA
             </span>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 text-xs">
             <span
               onClick={() => navigate('/changelog')}
-              className={`text-xs cursor-pointer transition-colors ${isDark ? 'text-slate-600 hover:text-violet-400' : 'text-slate-400 hover:text-violet-600'}`}
+              className={`cursor-pointer transition-colors ${isDark ? 'text-slate-600 hover:text-violet-400' : 'text-slate-400 hover:text-violet-600'}`}
             >
               Changelog
             </span>
-            <span className={`text-xs ${isDark ? 'text-slate-700' : 'text-slate-300'}`}>·</span>
-            <span className={`text-xs ${isDark ? 'text-slate-700' : 'text-slate-400'}`}>
+            <span className={isDark ? 'text-slate-700' : 'text-slate-300'}>·</span>
+            <span className={isDark ? 'text-slate-700' : 'text-slate-400'}>
               © 2026 JFABWIND Team
             </span>
           </div>

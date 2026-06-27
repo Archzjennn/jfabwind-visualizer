@@ -15,6 +15,7 @@ const RegexBuilder = lazy(() => import('./components/RegexBuilder').then(m => ({
 const QuizModal = lazy(() => import('./components/QuizModal').then(m => ({ default: m.QuizModal })));
 const GlossaryModal = lazy(() => import('./components/GlossaryModal').then(m => ({ default: m.GlossaryModal })));
 const SettingsModal = lazy(() => import('./components/SettingsModal').then(m => ({ default: m.SettingsModal })));
+const ShortcutsModal = lazy(() => import('./components/ShortcutsModal').then(m => ({ default: m.ShortcutsModal })));
 
 const FallbackSpinner = () => (
   <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black/20 backdrop-blur-sm">
@@ -35,6 +36,13 @@ const ACCENT_COLORS: Record<string, Record<string, string>> = {
 const AppLayout = () => {
   const { theme, toggleTheme } = useStore();
   const isDark = theme === 'dark';
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 1024);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const savedAccent = localStorage.getItem('app-accent');
@@ -72,23 +80,29 @@ const AppLayout = () => {
   }, [toggleTheme]);
 
   return (
-    <div 
-      className={`min-h-screen w-full font-sans transition-colors duration-300 pb-20 md:pb-0 ${isDark ? 'bg-[#080810]' : 'bg-slate-50 text-slate-900'}`}
-      style={{
-        backgroundImage: isDark ? 'linear-gradient(rgba(124,58,237,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(124,58,237,0.04) 1px, transparent 1px)' : 'linear-gradient(rgba(124,58,237,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(124,58,237,0.06) 1px, transparent 1px)',
-        backgroundSize: '64px 64px'
-      }}
-    >
+    <div className={`min-h-screen w-full font-sans transition-colors duration-300 pb-20 md:pb-0 relative z-10 ${isDark ? 'bg-[#080810]' : 'bg-slate-50 text-slate-900'}`}>
+      <div 
+        className="fixed inset-0 z-0 pointer-events-none hidden md:block"
+        style={{
+          backgroundImage: isDark 
+            ? 'linear-gradient(rgba(124,58,237,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(124,58,237,0.04) 1px, transparent 1px)' 
+            : 'linear-gradient(rgba(124,58,237,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(124,58,237,0.06) 1px, transparent 1px)',
+          backgroundSize: '64px 64px'
+        }}
+      />
+      
       <Navbar />
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full relative z-10">
         <MainDashboard />
       </main>
       <BottomNav />
+      
       <Suspense fallback={<FallbackSpinner />}>
         <RegexBuilder />
         <QuizModal />
         <GlossaryModal />
         <SettingsModal />
+        {!isMobile && <ShortcutsModal />}
       </Suspense>
       <Toast />
     </div>
