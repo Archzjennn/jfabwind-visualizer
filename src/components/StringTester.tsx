@@ -43,7 +43,7 @@ export const StringTester = memo(() => {
 
       const edgeId = `${currentState}-${transition.to}`;
       currentState = transition.to;
-      currentPath += ` →(${char})→ ${currentState}`;
+      currentPath += ` →(${char})map_to ${currentState}`;
 
       setFormattedPath(currentPath);
       setTestActiveElements([currentState], [edgeId]);
@@ -68,7 +68,7 @@ export const StringTester = memo(() => {
           onClick={() => setActiveTab('single')}
           className={`flex-1 py-4 px-4 text-[11px] font-black uppercase tracking-[0.2em] flex items-center justify-center gap-2 transition-all ${
             activeTab === 'single'
-              ? (isDark ? 'bg-[#080810] text-violet-400 border-b-2 border-violet-500' : 'bg-white text-violet-600 border-b-2 border-violet-600')
+              ? (isDark ? 'bg-[#080810]' : 'bg-white text-violet-600 border-b-2 border-violet-600')
               : 'text-slate-500 hover:text-slate-300'
           }`}
         >
@@ -78,7 +78,7 @@ export const StringTester = memo(() => {
           onClick={() => setActiveTab('batch')}
           className={`flex-1 py-4 px-4 text-[11px] font-black uppercase tracking-[0.2em] flex items-center justify-center gap-2 transition-all ${
             activeTab === 'batch'
-              ? (isDark ? 'bg-[#080810] text-violet-400 border-b-2 border-violet-500' : 'bg-white text-violet-600 border-b-2 border-violet-600')
+              ? (isDark ? 'bg-[#080810]' : 'bg-white text-violet-600 border-b-2 border-violet-600')
               : 'text-slate-500 hover:text-slate-300'
           }`}
         >
@@ -120,10 +120,11 @@ export const StringTester = memo(() => {
               </button>
             </div>
 
+            {/* Bagian teks status loading yang sudah diperbaiki multi-bahasanya */}
             {isTesting && (
               <div className={`mt-6 p-5 rounded-2xl border flex flex-col gap-3 animate-in fade-in slide-in-from-top-2 duration-300 ${isDark ? 'bg-amber-500/10 border-amber-500/20' : 'bg-amber-50 border-amber-200'}`}>
                 <div className="flex items-center gap-2 text-amber-500 font-bold text-xs uppercase tracking-widest">
-                  <Loader2 className="w-4 h-4 animate-spin" /> Testing String...
+                  <Loader2 className="w-4 h-4 animate-spin" /> {lang === 'id' ? 'Menguji String...' : 'Testing String...'}
                 </div>
                 <div className="text-sm font-mono font-semibold text-amber-600 dark:text-amber-400 break-all leading-loose">
                   {formattedPath}
