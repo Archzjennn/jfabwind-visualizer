@@ -212,8 +212,8 @@ export const Navbar = () => {
 
               <div className={`h-px w-full my-2 ${isDark ? 'bg-white/5' : 'bg-slate-200'}`}></div>
 
-              {/* Grid Aksi Cepat Bagian Bawah Menu Mobile */}
-              <div className="grid grid-cols-4 gap-2 pt-1 pb-2">
+              {/* Grid Aksi Cepat Bagian Bawah Menu Mobile - Diubah Menjadi 3 Kolom Saja */}
+              <div className="grid grid-cols-3 gap-2 pt-1 pb-2">
                 <button onClick={() => { setRunTour(true); setIsMobileMenuOpen(false); }} className={`flex flex-col items-center justify-center p-3 rounded-xl gap-1 transition-colors ${
                   isDark ? 'text-slate-400 hover:text-white hover:bg-white/5' : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100'
                 }`}>
@@ -226,13 +226,6 @@ export const Navbar = () => {
                 }`}>
                   <Languages className="w-4 h-4" />
                   <span className="text-[9px] font-black">{lang.toUpperCase()}</span>
-                </button>
-
-                <button onClick={() => { toggleShortcuts(); setIsMobileMenuOpen(false); }} className={`flex flex-col items-center justify-center p-3 rounded-xl gap-1 transition-colors ${
-                  isDark ? 'text-slate-400 hover:text-white hover:bg-white/5' : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100'
-                }`}>
-                  <Keyboard className="w-4 h-4" />
-                  <span className="text-[9px] font-medium">Keys</span>
                 </button>
 
                 <button onClick={() => { window.dispatchEvent(new Event('open-settings')); setIsMobileMenuOpen(false); }} className={`flex flex-col items-center justify-center p-3 rounded-xl gap-1 transition-colors ${
