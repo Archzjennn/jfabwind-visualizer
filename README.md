@@ -21,13 +21,13 @@ Aplikasi ini dibangun menggunakan ekosistem teknologi modern:
 
 ## 👥 Anggota Tim (JFABWIND)
 Proyek ini dikembangkan oleh kelompok mahasiswa Teknik Informatika:
-- **J**aenul Maarip (NIM: 241011402397)
+- **J**aenul Maarip
 - **F**arid Ramadhan
 - **A**ndika Rafi Hibatullah
 - **B**hismo Asmoro Suryoyudhanto
 - **W**isnu Aji Waskito
 - **I**bnu Ardiansyah
-- **N**oegroho (Asad Nur Satrio Noegroho)
+- Asad Nur Satrio **N**oegroho
 - **D**ava Algafari Hamid
 
 ## ⚙️ Cara Menjalankan Project secara Lokal

@@ -123,7 +123,7 @@ export const StringTester = memo(() => {
             {isTesting && (
               <div className={`mt-6 p-5 rounded-2xl border flex flex-col gap-3 animate-in fade-in slide-in-from-top-2 duration-300 ${isDark ? 'bg-amber-500/10 border-amber-500/20' : 'bg-amber-50 border-amber-200'}`}>
                 <div className="flex items-center gap-2 text-amber-500 font-bold text-xs uppercase tracking-widest">
-                  <Loader2 className="w-4 h-4 animate-spin" /> Menguji String...
+                  <Loader2 className="w-4 h-4 animate-spin" /> Testing String...
                 </div>
                 <div className="text-sm font-mono font-semibold text-amber-600 dark:text-amber-400 break-all leading-loose">
                   {formattedPath}
@@ -148,7 +148,7 @@ export const StringTester = memo(() => {
                   </div>
                   <div className={`text-sm font-mono break-all font-semibold leading-relaxed ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>
                     <span className="opacity-50 text-xs tracking-tighter mr-2 bg-black/20 px-2 py-1 rounded">PATH</span>
-                    {formattedPath} {result.accepted ? '' : ''}
+                    {formattedPath}
                   </div>
                 </div>
               </div>
