@@ -186,7 +186,7 @@ export const RegexInput = () => {
         return;
       }
       setFavorites([...favorites, item]);
-      showToast(lang === 'id' ? 'Disematkan ke favorit ⭐' : 'Pinned to favorites ⭐', 'success');
+      showToast(lang === 'id' ? 'Disematkan ke favorit' : 'Pinned to favorites', 'success');
     }
   };
 
