@@ -202,19 +202,21 @@ export const RegexInput = () => {
   };
 
   return (
-    <div className={`w-full max-w-4xl mx-auto mt-4 sm:mt-8 rounded-2xl p-4 sm:p-6 transition-all duration-300 border backdrop-blur-xl relative overflow-hidden ${
+    <div className={`w-full max-w-4xl mx-auto mt-4 sm:mt-8 rounded-2xl p-4 sm:p-6 transition-all duration-300 border backdrop-blur-xl relative ${
       isDark ? 'bg-white/5 border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.12)]' : 'bg-white/80 border-slate-200 shadow-xl'
     }`}>
-      <div className={`absolute top-0 right-0 w-64 h-64 rounded-full blur-[80px] -z-10 transition-colors duration-500 ${isDark ? 'bg-violet-600/10' : 'bg-violet-300/20'}`} />
-      <div className={`absolute bottom-0 left-0 w-48 h-48 rounded-full blur-[60px] -z-10 transition-colors duration-500 ${isDark ? 'bg-pink-600/10' : 'bg-pink-300/20'}`} />
+      <div className="absolute inset-0 rounded-2xl overflow-hidden -z-10 pointer-events-none">
+        <div className={`absolute top-0 right-0 w-64 h-64 rounded-full blur-[80px] transition-colors duration-500 ${isDark ? 'bg-violet-600/10' : 'bg-violet-300/20'}`} />
+        <div className={`absolute bottom-0 left-0 w-48 h-48 rounded-full blur-[60px] transition-colors duration-500 ${isDark ? 'bg-pink-600/10' : 'bg-pink-300/20'}`} />
+      </div>
 
       <div className="flex flex-col gap-5 z-10 relative">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
           <label className={`text-xs sm:text-sm font-bold tracking-wide uppercase flex items-center gap-2 shrink-0 ${isDark ? 'text-violet-400' : 'text-violet-600'}`}>
             <Fingerprint className="w-4 h-4" />
             {t.inputLabel}
           </label>
-          <div className="flex items-center gap-2 max-w-full min-w-0 overflow-hidden w-full sm:w-auto">
+          <div className="flex items-center gap-2 min-w-0 w-full sm:w-auto">
             <span className={`text-[10px] uppercase font-bold tracking-wider shrink-0 ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>
               {t.example}
             </span>
