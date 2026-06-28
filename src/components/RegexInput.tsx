@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Play, Loader2, AlertCircle, HelpCircle, ChevronDown, Link as LinkIcon, History, Trash2, X, Fingerprint, Star } from 'lucide-react';
@@ -8,14 +9,12 @@ import { preprocessRegex } from '../algorithms/regexPreprocessor';
 import { id } from '../i18n/id';
 import { en } from '../i18n/en';
 
-// Pool of Examples (Rotasi setiap 60 detik)
 const EXAMPLE_SETS = [
   ['a+b', 'a?b', 'a{3}', '[ab]c'],
   ['(0|1)*', '1(0|1)+', '0{2,4}', '[0-9]+'],
   ['[a-z]+', '(ab|cd)?', 'a*b+c?', '(0|1)*111']
 ];
 
-// FIX: Syntax Guide Dictionary agar mendukung ID dan EN
 const SYNTAX_GUIDE = [
   { symbol: '(s)', id: 'Grouping (Pengelompokan)', en: 'Grouping' },
   { symbol: 's|t', id: 'Union (Atau)', en: 'Union (Alternation)' },
@@ -115,14 +114,11 @@ export const RegexInput = () => {
     const params = new URLSearchParams(window.location.search);
     const regexParam = params.get('regex');
     if (regexParam) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setInput(regexParam);
       processRegex(regexParam);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // --- KARTU RECENTLY VIEWED ---
   useEffect(() => {
     const handleTrigger = (e: Event) => {
       const customEvent = e as CustomEvent;
@@ -133,9 +129,7 @@ export const RegexInput = () => {
     };
     window.addEventListener('trigger-process-regex', handleTrigger);
     return () => window.removeEventListener('trigger-process-regex', handleTrigger);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  // -------------------------------------------------------------------
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -154,7 +148,6 @@ export const RegexInput = () => {
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [input, isProcessing]);
 
   const handleVisualize = () => processRegex(input);
@@ -209,7 +202,7 @@ export const RegexInput = () => {
   };
 
   return (
-    <div className={`w-full max-w-4xl mx-auto mt-8 rounded-2xl p-6 transition-all duration-300 border backdrop-blur-xl relative overflow-hidden ${
+    <div className={`w-full max-w-4xl mx-auto mt-4 sm:mt-8 rounded-2xl p-4 sm:p-6 transition-all duration-300 border backdrop-blur-xl relative overflow-hidden ${
       isDark ? 'bg-white/5 border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.12)]' : 'bg-white/80 border-slate-200 shadow-xl'
     }`}>
       <div className={`absolute top-0 right-0 w-64 h-64 rounded-full blur-[80px] -z-10 transition-colors duration-500 ${isDark ? 'bg-violet-600/10' : 'bg-violet-300/20'}`} />
@@ -217,12 +210,12 @@ export const RegexInput = () => {
 
       <div className="flex flex-col gap-5 z-10 relative">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <label className={`text-sm font-bold tracking-wide uppercase flex items-center gap-2 ${isDark ? 'text-violet-400' : 'text-violet-600'}`}>
+          <label className={`text-xs sm:text-sm font-bold tracking-wide uppercase flex items-center gap-2 shrink-0 ${isDark ? 'text-violet-400' : 'text-violet-600'}`}>
             <Fingerprint className="w-4 h-4" />
             {t.inputLabel}
           </label>
-          <div className="flex flex-wrap gap-2 items-center">
-            <span className={`text-[10px] uppercase font-bold tracking-wider ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>
+          <div className="flex items-center gap-2 max-w-full min-w-0 overflow-hidden w-full sm:w-auto">
+            <span className={`text-[10px] uppercase font-bold tracking-wider shrink-0 ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>
               {t.example}
             </span>
             <AnimatePresence mode="wait">
@@ -232,13 +225,13 @@ export const RegexInput = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 5 }}
                 transition={{ duration: 0.3 }}
-                className="flex gap-2"
+                className="flex-1 min-w-0 flex gap-2 overflow-x-auto whitespace-nowrap py-1.5 px-0.5 no-scrollbar sm:overflow-visible sm:whitespace-normal"
               >
                 {EXAMPLE_SETS[exampleIndex].map((ex) => (
                   <button
                     key={ex}
                     onClick={() => { setInput(ex); setError(null); processRegex(ex); }}
-                    className={`text-[11px] px-3 py-1 rounded-full font-mono transition-all font-semibold ${
+                    className={`text-[11px] px-3 py-2 sm:py-1 rounded-full font-mono transition-all font-semibold shrink-0 min-h-[44px] sm:min-h-0 flex items-center justify-center ${
                       isDark ? 'bg-white/5 hover:bg-violet-500/20 text-slate-300 hover:text-violet-300 border border-white/5 hover:border-violet-500/30' 
                              : 'bg-slate-100 hover:bg-violet-100 text-slate-600 hover:text-violet-700 border border-transparent'
                     }`}
@@ -252,11 +245,11 @@ export const RegexInput = () => {
         </div>
 
         <div className="flex flex-col sm:flex-row gap-3">
-          <div className="relative flex-1 group">
+          <div className="relative flex-1 group w-full">
             <div
               ref={overlayRef}
               aria-hidden="true"
-              className={`absolute inset-0 w-full h-full px-5 py-4 rounded-xl border-2 border-transparent text-xl tracking-wider font-mono overflow-hidden whitespace-pre pointer-events-none transition-all flex items-center ${
+              className={`absolute inset-0 w-full h-full px-4 py-3.5 md:px-5 md:py-4 rounded-xl border-2 border-transparent text-base md:text-xl tracking-wider font-mono overflow-hidden whitespace-pre pointer-events-none transition-all flex items-start ${
                 isDark ? 'bg-black/40' : 'bg-slate-50'
               }`}
             >
@@ -277,7 +270,7 @@ export const RegexInput = () => {
               onScroll={handleScroll}
               spellCheck="false"
               autoComplete="off"
-              className={`relative z-10 w-full px-5 py-4 rounded-xl border-2 outline-none transition-all font-mono text-xl tracking-wider bg-transparent ${
+              className={`relative z-10 w-full px-4 py-3.5 md:px-5 md:py-4 rounded-xl border-2 outline-none transition-all font-mono text-base md:text-xl tracking-wider bg-transparent ${
                 isDark 
                   ? 'text-transparent caret-violet-400 border-white/10 hover:border-white/20 focus:border-violet-500 focus:bg-violet-500/5 focus:shadow-[0_0_20px_rgba(124,58,237,0.3)]' 
                   : 'text-transparent caret-violet-600 border-slate-200 hover:border-slate-300 focus:border-violet-500 focus:bg-white focus:shadow-[0_0_20px_rgba(124,58,237,0.15)]'
@@ -285,12 +278,12 @@ export const RegexInput = () => {
             />
           </div>
           
-          <div className="flex flex-col sm:flex-row gap-2">
+          <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
             <motion.button 
               whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} 
               onClick={handleCopyLink} disabled={!input || isProcessing} 
               title={`${t.copyLink} (Ctrl + L)`} 
-              className={`px-5 py-4 rounded-xl font-bold flex items-center justify-center transition-all disabled:opacity-50 disabled:cursor-not-allowed sm:w-auto w-full border ${
+              className={`px-5 py-3.5 md:py-4 rounded-xl font-bold flex items-center justify-center transition-all disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto border min-h-[44px] ${
                 isDark ? 'bg-white/5 hover:bg-white/10 text-slate-300 border-white/5' : 'bg-white hover:bg-slate-50 text-slate-600 border-slate-200 shadow-sm'
               }`}
             >
@@ -303,7 +296,7 @@ export const RegexInput = () => {
               whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} 
               onClick={handleVisualize} disabled={isProcessing} 
               title={`${t.visualize} (Ctrl + Enter)`} 
-              className="px-8 py-4 bg-violet-600 hover:bg-violet-500 text-white rounded-xl font-bold tracking-wide flex items-center justify-center gap-2 transition-all disabled:opacity-70 disabled:cursor-not-allowed sm:w-auto w-full shadow-lg shadow-violet-500/25 hover:shadow-violet-500/40"
+              className="px-8 py-3.5 md:py-4 bg-violet-600 hover:bg-violet-500 text-white rounded-xl font-bold tracking-wide flex items-center justify-center gap-2 transition-all disabled:opacity-70 disabled:cursor-not-allowed w-full sm:w-auto shadow-lg shadow-violet-500/25 hover:shadow-violet-500/40 min-h-[44px]"
             >
               {isProcessing ? <Loader2 className="w-5 h-5 animate-spin" /> : <Play className="w-5 h-5 fill-current" />}
               {t.visualize}
@@ -311,13 +304,13 @@ export const RegexInput = () => {
           </div>
         </div>
 
-        <div className="flex items-center gap-5 mt-2">
-          <button onClick={() => { setShowSyntax(!showSyntax); setShowHistory(false); }} className={`flex items-center gap-1.5 text-[11px] font-bold tracking-widest uppercase transition-colors ${showSyntax ? 'text-violet-500' : (isDark ? 'text-slate-500 hover:text-violet-400' : 'text-slate-400 hover:text-violet-600')}`}>
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-5 mt-2">
+          <button onClick={() => { setShowSyntax(!showSyntax); setShowHistory(false); }} className={`flex items-center gap-1.5 text-[11px] font-bold tracking-widest uppercase transition-colors min-h-[44px] sm:min-h-0 ${showSyntax ? 'text-violet-500' : (isDark ? 'text-slate-500 hover:text-violet-400' : 'text-slate-400 hover:text-violet-600')}`}>
             <HelpCircle className="w-4 h-4" /> {t.syntaxGuide}
             <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${showSyntax ? 'rotate-180' : ''}`} />
           </button>
           
-          <button onClick={() => { setShowHistory(!showHistory); setShowSyntax(false); }} title={`${t.history} (Ctrl + H)`} className={`flex items-center gap-1.5 text-[11px] font-bold tracking-widest uppercase transition-colors ${showHistory ? 'text-violet-500' : (isDark ? 'text-slate-500 hover:text-violet-400' : 'text-slate-400 hover:text-violet-600')}`}>
+          <button onClick={() => { setShowHistory(!showHistory); setShowSyntax(false); }} title={`${t.history} (Ctrl + H)`} className={`flex items-center gap-1.5 text-[11px] font-bold tracking-widest uppercase transition-colors min-h-[44px] sm:min-h-0 ${showHistory ? 'text-violet-500' : (isDark ? 'text-slate-500 hover:text-violet-400' : 'text-slate-400 hover:text-violet-600')}`}>
             <History className="w-4 h-4" /> {t.history} ({history.length + favorites.length})
             <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${showHistory ? 'rotate-180' : ''}`} />
           </button>
@@ -326,7 +319,7 @@ export const RegexInput = () => {
         <AnimatePresence mode="wait">
           {showSyntax && (
             <motion.div key="syntax" initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="overflow-hidden">
-              <div className={`grid grid-cols-1 sm:grid-cols-2 gap-4 p-5 rounded-xl border mt-2 ${isDark ? 'bg-black/30 border-white/5' : 'bg-slate-50/50 border-slate-200/60'}`}>
+              <div className={`grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 p-4 sm:p-5 rounded-xl border mt-2 ${isDark ? 'bg-black/30 border-white/5' : 'bg-slate-50/50 border-slate-200/60'}`}>
                 {SYNTAX_GUIDE.map((item, idx) => (
                   <div key={idx} className="flex items-center gap-3">
                     <code className={`px-2 py-1 rounded text-xs font-mono font-bold min-w-[4rem] text-center border ${isDark ? 'bg-violet-500/10 text-violet-300 border-violet-500/20' : 'bg-violet-50 text-violet-600 border-violet-100'}`}>
@@ -343,12 +336,12 @@ export const RegexInput = () => {
 
           {showHistory && (
             <motion.div key="history" initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="overflow-hidden">
-              <div className={`p-5 rounded-xl border mt-2 ${isDark ? 'bg-black/30 border-white/5' : 'bg-slate-50/50 border-slate-200/60'}`}>
+              <div className={`p-4 sm:p-5 rounded-xl border mt-2 ${isDark ? 'bg-black/30 border-white/5' : 'bg-slate-50/50 border-slate-200/60'}`}>
                 
                 <div className={`flex items-center justify-between mb-4 pb-3 border-b ${isDark ? 'border-white/5' : 'border-slate-200'}`}>
                   <span className={`text-xs font-bold tracking-widest uppercase ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>{t.history}</span>
                   {history.length > 0 && (
-                    <button onClick={() => clearHistory()} className="text-[10px] font-bold uppercase tracking-wider text-pink-500 hover:text-pink-400 flex items-center gap-1 transition-colors">
+                    <button onClick={() => clearHistory()} className="text-[10px] font-bold uppercase tracking-wider text-pink-500 hover:text-pink-400 flex items-center gap-1 transition-colors min-h-[44px] sm:min-h-0">
                       <Trash2 className="w-3.5 h-3.5" /> {t.clearAll}
                     </button>
                   )}
@@ -357,7 +350,7 @@ export const RegexInput = () => {
                 {(history.length === 0 && favorites.length === 0) ? (
                   <div className={`text-center py-6 text-sm font-medium ${isDark ? 'text-slate-600' : 'text-slate-400'}`}>{t.noHistory}</div>
                 ) : (
-                  <div className="space-y-4 max-h-64 overflow-y-auto pr-2 custom-scrollbar">
+                  <div className="space-y-4 max-h-64 overflow-y-auto pr-1 sm:pr-2 custom-scrollbar">
                     
                     {favorites.length > 0 && (
                       <div>
@@ -367,10 +360,10 @@ export const RegexInput = () => {
                         <ul className="space-y-1.5">
                           {favorites.map((fav, idx) => (
                             <motion.li layout key={`fav-${fav}-${idx}`} className={`flex items-center justify-between p-2 rounded-lg border transition-all group ${isDark ? 'bg-amber-500/10 border-amber-500/20 hover:border-amber-500/40' : 'bg-amber-50 border-amber-200 hover:border-amber-400 shadow-sm'}`}>
-                              <button onClick={() => { setInput(fav); processRegex(fav); setShowHistory(false); }} className="flex-1 text-left flex items-center gap-2">
+                              <button onClick={() => { setInput(fav); processRegex(fav); setShowHistory(false); }} className="flex-1 text-left flex items-center gap-2 min-h-[44px] sm:min-h-0">
                                 <span className={`font-mono text-sm font-bold ${isDark ? 'text-amber-400' : 'text-amber-700'}`}>{fav}</span>
                               </button>
-                              <button onClick={(e) => toggleFavorite(e, fav)} className={`p-1.5 rounded transition-all ${isDark ? 'text-amber-500 hover:bg-amber-500/20' : 'text-amber-600 hover:bg-amber-100'}`} title={lang === 'id' ? 'Hapus dari Favorit' : 'Remove from Favorites'}>
+                              <button onClick={(e) => toggleFavorite(e, fav)} className={`p-1.5 rounded transition-all min-h-[44px] sm:min-h-0 flex items-center justify-center ${isDark ? 'text-amber-500 hover:bg-amber-500/20' : 'text-amber-600 hover:bg-amber-100'}`} title={lang === 'id' ? 'Hapus dari Favorit' : 'Remove from Favorites'}>
                                 <Star className="w-4 h-4 fill-current drop-shadow-sm" />
                               </button>
                             </motion.li>
@@ -389,16 +382,16 @@ export const RegexInput = () => {
                             const isPinned = favorites.includes(item.regex);
                             return (
                               <motion.li layout key={item.regex} className={`flex items-center justify-between p-2 rounded-lg border transition-all group ${isDark ? 'bg-white/5 border-white/5 hover:border-violet-500/30' : 'bg-white border-slate-200 hover:border-violet-300 shadow-sm'}`}>
-                                <button onClick={() => { setInput(item.regex); processRegex(item.regex); setShowHistory(false); }} className="flex-1 text-left flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 overflow-hidden">
+                                <button onClick={() => { setInput(item.regex); processRegex(item.regex); setShowHistory(false); }} className="flex-1 text-left flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 overflow-hidden min-h-[44px] sm:min-h-0">
                                   <span className={`font-mono text-sm font-bold truncate ${isDark ? 'text-violet-300' : 'text-violet-600'}`}>{item.regex}</span>
                                   <span className={`text-[10px] font-medium tracking-wide shrink-0 ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>{formatTime(item.timestamp)}</span>
                                 </button>
                                 
-                                <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                                  <button onClick={(e) => toggleFavorite(e, item.regex)} className={`p-1.5 rounded transition-all ${isPinned ? 'text-amber-500' : (isDark ? 'text-slate-500 hover:text-amber-400 hover:bg-white/5' : 'text-slate-400 hover:text-amber-500 hover:bg-slate-50')}`} title={lang === 'id' ? 'Sematkan ke Favorit' : 'Pin to Favorites'}>
+                                <div className="flex items-center gap-1 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+                                  <button onClick={(e) => toggleFavorite(e, item.regex)} className={`p-1.5 rounded transition-all min-h-[44px] sm:min-h-0 flex items-center justify-center ${isPinned ? 'text-amber-500' : (isDark ? 'text-slate-500 hover:text-amber-400 hover:bg-white/5' : 'text-slate-400 hover:text-amber-500 hover:bg-slate-50')}`} title={lang === 'id' ? 'Sematkan ke Favorit' : 'Pin to Favorites'}>
                                     <Star className={`w-4 h-4 ${isPinned ? 'fill-current' : ''}`} />
                                   </button>
-                                  <button onClick={() => removeHistory(item.regex)} className={`p-1.5 rounded transition-all ${isDark ? 'text-slate-500 hover:text-pink-400 hover:bg-pink-500/20' : 'text-slate-400 hover:text-pink-600 hover:bg-pink-50'}`} title={lang === 'id' ? 'Hapus' : 'Delete'}>
+                                  <button onClick={() => removeHistory(item.regex)} className={`p-1.5 rounded transition-all min-h-[44px] sm:min-h-0 flex items-center justify-center ${isDark ? 'text-slate-500 hover:text-pink-400 hover:bg-pink-500/20' : 'text-slate-400 hover:text-pink-600 hover:bg-pink-50'}`} title={lang === 'id' ? 'Hapus' : 'Delete'}>
                                     <X className="w-4 h-4" />
                                   </button>
                                 </div>

@@ -43,7 +43,7 @@ export const StringTester = memo(() => {
 
       const edgeId = `${currentState}-${transition.to}`;
       currentState = transition.to;
-      currentPath += ` →(${char})map_to ${currentState}`;
+      currentPath += ` →(${char}) ${currentState}`;
 
       setFormattedPath(currentPath);
       setTestActiveElements([currentState], [edgeId]);
@@ -86,13 +86,13 @@ export const StringTester = memo(() => {
         </button>
       </div>
 
-      <div className="p-6 flex-1 flex flex-col">
+      <div className="p-4 sm:p-6 flex-1 flex flex-col">
         {activeTab === 'single' ? (
           <>
             <p className={`text-xs font-medium mb-5 leading-relaxed ${isDark ? 'text-slate-500' : 'text-slate-500'}`}>
               {t.testDesc}
             </p>
-            <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row gap-2">
               <input
                 type="text"
                 value={inputString}
@@ -113,42 +113,41 @@ export const StringTester = memo(() => {
               <button
                 onClick={handleTest}
                 disabled={isTesting}
-                className="px-5 py-3 bg-violet-600 hover:bg-violet-500 disabled:opacity-70 disabled:cursor-not-allowed text-white rounded-xl text-xs font-black uppercase tracking-widest transition-all active:scale-95 shadow-lg shadow-violet-500/20 whitespace-nowrap flex items-center gap-2"
+                className="w-full sm:w-auto px-5 py-3 bg-violet-600 hover:bg-violet-500 disabled:opacity-70 disabled:cursor-not-allowed text-white rounded-xl text-xs font-black uppercase tracking-widest transition-all active:scale-95 shadow-lg shadow-violet-500/20 whitespace-nowrap flex items-center justify-center gap-2"
               >
                 {isTesting ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
                 {t.btnTest}
               </button>
             </div>
 
-            {/* Bagian teks status loading yang sudah diperbaiki multi-bahasanya */}
             {isTesting && (
-              <div className={`mt-6 p-5 rounded-2xl border flex flex-col gap-3 animate-in fade-in slide-in-from-top-2 duration-300 ${isDark ? 'bg-amber-500/10 border-amber-500/20' : 'bg-amber-50 border-amber-200'}`}>
+              <div className={`mt-6 p-4 sm:p-5 rounded-2xl border flex flex-col gap-3 animate-in fade-in slide-in-from-top-2 duration-300 ${isDark ? 'bg-amber-500/10 border-amber-500/20' : 'bg-amber-50 border-amber-200'}`}>
                 <div className="flex items-center gap-2 text-amber-500 font-bold text-xs uppercase tracking-widest">
                   <Loader2 className="w-4 h-4 animate-spin" /> {lang === 'id' ? 'Menguji String...' : 'Testing String...'}
                 </div>
-                <div className="text-sm font-mono font-semibold text-amber-600 dark:text-amber-400 break-all leading-loose">
+                <div className="text-xs sm:text-sm font-mono font-semibold text-amber-600 dark:text-amber-400 break-all leading-relaxed sm:leading-loose">
                   {formattedPath}
                 </div>
               </div>
             )}
 
             {result && !isTesting && (
-              <div className={`mt-6 p-5 rounded-2xl border animate-in fade-in slide-in-from-top-2 duration-300 flex flex-col sm:flex-row sm:items-center gap-4 ${
+              <div className={`mt-6 p-4 sm:p-5 rounded-2xl border animate-in fade-in slide-in-from-top-2 duration-300 flex flex-col sm:flex-row sm:items-center gap-4 ${
                 result.accepted 
                   ? (isDark ? 'bg-emerald-500/10 border-emerald-500/20' : 'bg-emerald-50 border-emerald-200') 
                   : (isDark ? 'bg-pink-500/10 border-pink-500/20' : 'bg-pink-50 border-pink-200')
               }`}>
                 {result.accepted ? (
-                  <div className={`p-2 rounded-full ${isDark ? 'bg-emerald-500/20' : 'bg-emerald-100'}`}><CheckCircle2 className="w-6 h-6 text-emerald-500" /></div>
+                  <div className={`p-2 rounded-full self-start sm:self-auto ${isDark ? 'bg-emerald-500/20' : 'bg-emerald-100'}`}><CheckCircle2 className="w-6 h-6 text-emerald-500" /></div>
                 ) : (
-                  <div className={`p-2 rounded-full ${isDark ? 'bg-pink-500/20' : 'bg-pink-100'}`}><XCircle className="w-6 h-6 text-pink-500" /></div>
+                  <div className={`p-2 rounded-full self-start sm:self-auto ${isDark ? 'bg-pink-500/20' : 'bg-pink-100'}`}><XCircle className="w-6 h-6 text-pink-500" /></div>
                 )}
                 <div className="min-w-0 flex-1">
                   <div className={`font-black uppercase tracking-widest text-xs mb-2 ${result.accepted ? 'text-emerald-500' : 'text-pink-500'}`}>
                     {result.accepted ? 'Accepted (Diterima)' : 'Rejected (Ditolak)'}
                   </div>
-                  <div className={`text-sm font-mono break-all font-semibold leading-relaxed ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>
-                    <span className="opacity-50 text-xs tracking-tighter mr-2 bg-black/20 px-2 py-1 rounded">PATH</span>
+                  <div className={`text-xs sm:text-sm font-mono break-all font-semibold leading-relaxed ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>
+                    <span className="opacity-50 text-[10px] tracking-tighter mr-2 bg-black/20 px-2 py-1 rounded">PATH</span>
                     {formattedPath}
                   </div>
                 </div>
@@ -157,7 +156,7 @@ export const StringTester = memo(() => {
             
             {!result && !isTesting && (
                <div className="mt-10 flex-1 flex flex-col items-center justify-center opacity-10">
-                  <Fingerprint className={`w-20 h-20 ${isDark ? 'text-white' : 'text-slate-900'}`} />
+                  <Fingerprint className={`w-16 h-16 sm:w-20 sm:h-20 ${isDark ? 'text-white' : 'text-slate-900'}`} />
                </div>
             )}
           </>

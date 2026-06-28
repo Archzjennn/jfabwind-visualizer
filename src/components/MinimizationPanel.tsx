@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Scissors, ChevronDown, CheckCircle2 } from 'lucide-react';
@@ -15,17 +16,16 @@ export const MinimizationPanel = () => {
   const [logs, setLogs] = useState<string[]>([]);
   const [isExpanded, setIsExpanded] = useState(false);
 
-  if (!dfa && minDfa) {
+  useEffect(() => {
     setMinDfa(null);
     setLogs([]);
     setIsExpanded(false);
-  }
+  }, [dfa]);
 
   useEffect(() => {
     if (dfa && minDfa) {
-      const { logs: updatedLogs } = minimizeDFA(dfa, lang);
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setLogs(updatedLogs);
+      const { logs: resultLogs } = minimizeDFA(dfa, lang);
+      setLogs(resultLogs);
     }
   }, [lang, dfa, minDfa]);
 
@@ -80,7 +80,7 @@ export const MinimizationPanel = () => {
                 </div>
                 <div className={`p-4 rounded-xl border ${isDark ? 'bg-violet-500/10 border-violet-500/20' : 'bg-violet-50 border-violet-200'}`}>
                   <div className={`text-[10px] font-bold uppercase tracking-widest mb-1 ${isDark ? 'text-violet-400' : 'text-violet-600'}`}>{lang === 'id' ? 'DFA Minimal' : 'Minimal DFA'}</div>
-                  <div className={`text-2xl font-black font-mono ${isDark ? 'text-violet-300' : 'text-violet-700'}`}>{minDfa.states.length} <span className="text-xs font-sans font-medium opacity-50">States</span></div>
+                  <div className={`text-2xl font-black font-mono ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>{minDfa.states.length} <span className="text-xs font-sans font-medium opacity-50">States</span></div>
                 </div>
                 <div className={`p-4 rounded-xl border flex flex-col justify-center ${isAlreadyMinimal ? (isDark ? 'bg-emerald-500/10 border-emerald-500/20' : 'bg-emerald-50 border-emerald-200') : (isDark ? 'bg-sky-500/10 border-sky-500/20' : 'bg-sky-50 border-sky-200')}`}>
                   {isAlreadyMinimal ? (

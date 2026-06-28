@@ -13,7 +13,7 @@ export interface Automaton {
   transitions: Transition[];
   startState: State;
   acceptStates: State[];
-  mapping?: Record<string, State[]>; // Untuk menyimpan relasi state DFA -> subset NFA
+  mapping?: Record<string, State[]>; 
 }
 
 export interface NodeData {

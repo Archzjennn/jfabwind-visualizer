@@ -187,7 +187,6 @@ export const AutomataGraph = memo(({ automaton, title }: Props) => {
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMaximized, automaton, title, isDark, regex]);
 
   useEffect(() => {
@@ -234,14 +233,12 @@ export const AutomataGraph = memo(({ automaton, title }: Props) => {
       const rect = nodeElement.getBoundingClientRect();
       
       const nodeCenterX = rect.left + rect.width / 2;
-      const tooltipMaxHalfWidth = 160; // Setengah dari lebar maksimal (320px / 2)
+      const tooltipMaxHalfWidth = 160; 
       let safeX = nodeCenterX;
       
-      // Jika terlampau dekat ke ujung kanan layar (seperti q5) -> geser ke kiri otomatis
       if (nodeCenterX + tooltipMaxHalfWidth > window.innerWidth - 20) {
         safeX = window.innerWidth - tooltipMaxHalfWidth - 20;
       }
-      // Jika terlampau dekat ke ujung kiri layar -> geser ke kanan otomatis
       else if (nodeCenterX - tooltipMaxHalfWidth < 20) {
         safeX = tooltipMaxHalfWidth + 20;
       }
@@ -275,8 +272,8 @@ export const AutomataGraph = memo(({ automaton, title }: Props) => {
     }, {} as Record<string, string[]>);
     
     const outMap = outgoing.reduce((acc, t) => {
-      if (!acc[t.from]) acc[t.from] = [];
-      acc[t.from].push(t.symbol);
+      if (!acc[t.to]) acc[t.to] = [];
+      acc[t.to].push(t.symbol);
       return acc;
     }, {} as Record<string, string[]>);
 
@@ -290,8 +287,8 @@ export const AutomataGraph = memo(({ automaton, title }: Props) => {
 
     const portalContent = (
       <AnimatePresence>
-        {/* FIXED CONTAINER: Mengunci perataan tengah mutlak agar tidak didepak oleh Framer Motion */}
         <div
+          key={`tooltip-${tooltip.nodeId}`}
           style={{ 
             position: 'fixed', 
             left: tooltip.x, 
