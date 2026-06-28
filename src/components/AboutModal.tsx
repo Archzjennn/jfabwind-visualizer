@@ -50,12 +50,12 @@ export const AboutModal = () => {
             transition={{ type: "spring", duration: 0.5, bounce: 0.15 }}
             className={`relative z-10 w-full max-w-5xl max-h-[90vh] overflow-y-auto custom-scrollbar border rounded-3xl shadow-2xl ${isDark ? 'bg-[#080810]' : 'bg-white'} ${isDark ? 'border-white/10 shadow-black' : 'border-slate-200 shadow-slate-300/50'}`}
           >
-            <div className="relative h-24 sm:h-36 md:h-40 shrink-0 group">
-              <div className="absolute inset-0 rounded-t-3xl overflow-hidden">
+            <div className="relative h-[calc(100vw/6.4)] sm:h-36 md:h-40 shrink-0 group">
+              <div className={`absolute inset-0 rounded-t-3xl overflow-hidden ${isDark ? 'bg-[#080810]' : 'bg-slate-100'}`}>
                 <img 
                   src={isDark ? "/BannerDark.png" : "/BannerLight.png"} 
                   alt="Team Banner" 
-                  className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                  className="w-full h-full object-contain sm:object-cover object-center transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-black/20" />
               </div>
@@ -78,7 +78,7 @@ export const AboutModal = () => {
                 <h2 className={`text-2xl sm:text-3xl font-black flex items-center gap-3 ${isDark ? 'text-white' : 'text-slate-900'}`}>
                   JFABWIND Visualizer <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-amber-400 animate-pulse" />
                 </h2>
-                <p className={`mt-3 text-xs sm:text-sm leading-relaxed max-w-3xl ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                <p className={`mt-3 text-xs sm:text-sm leading-relaxed max-w-3xl text-justify ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
                   {t.aboutDesc}
                 </p>
               </div>

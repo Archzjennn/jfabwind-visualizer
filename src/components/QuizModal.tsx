@@ -345,29 +345,29 @@ export const QuizModal = () => {
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={closeQuiz} className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
 
         <motion.div initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }} className={`relative w-full max-w-4xl h-[90vh] overflow-hidden rounded-3xl border shadow-2xl flex flex-col ${isDark ? 'bg-[#080810] border-white/10' : 'bg-slate-50 border-slate-200'}`}>
-          <div className={`px-4 sm:px-6 py-4 flex justify-between items-center shrink-0 z-20 ${isDark ? 'bg-[#080810]/95 backdrop-blur border-b border-white/10' : 'bg-white/95 backdrop-blur border-b border-slate-200'}`}>
-            <div className={`flex items-center gap-2.5 font-black tracking-widest uppercase text-sm ${isDark ? 'text-violet-400' : 'text-violet-600'}`}>
-              <Target className="w-5 h-5 hidden sm:block" /> <span className="hidden sm:inline">Automata Quiz</span>
+          <div className={`px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center shrink-0 z-20 ${isDark ? 'bg-[#080810]/95 backdrop-blur border-b border-white/10' : 'bg-white/95 backdrop-blur border-b border-slate-200'}`}>
+            <div className={`flex items-center gap-2 font-black tracking-widest uppercase text-xs sm:text-sm ${isDark ? 'text-violet-400' : 'text-violet-600'}`}>
+              <Target className="w-4 h-4 sm:w-5 sm:h-5" /> <span>Automata Quiz</span>
             </div>
 
-            <div className="flex items-center gap-4 sm:gap-6 flex-1 sm:flex-none justify-end">
-              <div className="flex flex-col items-end justify-center min-w-[100px] sm:min-w-[140px] text-right">
-                <div className="flex items-center gap-2">
-                  <Trophy className={`w-4 h-4 ${isDark ? 'text-amber-400' : 'text-amber-500'}`} />
-                  <div className={`text-sm font-black uppercase tracking-wider ${isDark ? 'text-white' : 'text-slate-800'}`}>{rankInfo.current}</div>
+            <div className="flex items-center gap-2 sm:gap-6">
+              <div className="flex flex-col items-end justify-center min-w-[80px] sm:min-w-[140px] text-right">
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                  <Trophy className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${isDark ? 'text-amber-400' : 'text-amber-500'}`} />
+                  <div className={`text-xs sm:text-sm font-black uppercase tracking-wider ${isDark ? 'text-white' : 'text-slate-800'}`}>{rankInfo.current}</div>
                 </div>
                 <div className={`w-full h-1 mt-1.5 rounded-full overflow-hidden ${isDark ? 'bg-white/10' : 'bg-slate-200'}`}>
                   <div className="h-full bg-amber-500 transition-all duration-500" style={{ width: `${Math.max(0, Math.min(100, rankInfo.progress))}%` }} />
                 </div>
               </div>
               
-              <div className={`w-px h-8 ${isDark ? 'bg-white/10' : 'bg-slate-200'}`}></div>
+              <div className={`w-px h-6 sm:h-8 ${isDark ? 'bg-white/10' : 'bg-slate-200'}`}></div>
               
-              <div className="flex flex-col items-end justify-center min-w-[70px]">
-                <div className="flex items-center gap-1.5">
-                  <Zap className={`w-4 h-4 fill-current ${isDark ? 'text-sky-400' : 'text-sky-500'}`} />
-                  <div className={`text-lg font-black font-mono tracking-tighter leading-none ${isDark ? 'text-white' : 'text-slate-800'}`}>
-                    {energy} <span className={`text-xs ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>/ 25</span>
+              <div className="flex flex-col items-end justify-center min-w-[56px] sm:min-w-[70px]">
+                <div className="flex items-center gap-1 sm:gap-1.5">
+                  <Zap className={`w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current ${isDark ? 'text-sky-400' : 'text-sky-500'}`} />
+                  <div className={`text-base sm:text-lg font-black font-mono tracking-tighter leading-none ${isDark ? 'text-white' : 'text-slate-800'}`}>
+                    {energy} <span className={`text-[10px] sm:text-xs ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>/ 25</span>
                   </div>
                 </div>
                 <div className={`w-full h-1 mt-1.5 rounded-full overflow-hidden ${isDark ? 'bg-white/10' : 'bg-slate-200'}`}>
@@ -379,15 +379,15 @@ export const QuizModal = () => {
                   </div>
                 )}
               </div>
-              <button onClick={closeQuiz} className={`p-2 rounded-xl transition-colors ${isDark ? 'bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white' : 'bg-slate-100 text-slate-500 hover:bg-slate-200'}`}><X className="w-5 h-5" /></button>
+              <button onClick={closeQuiz} className={`p-1.5 sm:p-2 rounded-xl transition-colors ${isDark ? 'bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white' : 'bg-slate-100 text-slate-500 hover:bg-slate-200'}`}><X className="w-4 h-4 sm:w-5 sm:h-5" /></button>
             </div>
           </div>
 
           <div className="flex-1 overflow-hidden relative flex flex-col">
             {gameState === 'map' && (
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex-1 flex flex-col h-full">
-                <div className={`px-6 py-4 flex flex-wrap items-center justify-between gap-4 border-b shrink-0 ${isDark ? 'border-white/5 bg-black/20' : 'border-slate-100 bg-slate-50/50'}`}>
-                  <div className="flex items-center gap-6">
+                <div className={`px-4 sm:px-6 py-3 sm:py-4 flex flex-wrap items-center justify-between gap-3 border-b shrink-0 ${isDark ? 'border-white/5 bg-black/20' : 'border-slate-100 bg-slate-50/50'}`}>
+                  <div className="flex items-center gap-4 sm:gap-6">
                     <div>
                       <div className={`text-[10px] font-bold uppercase tracking-widest mb-1 ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>{lang === 'id' ? 'Total Poin' : 'Total Points'}</div>
                       <div className={`text-xl font-black font-mono tracking-tighter ${isDark ? 'text-amber-400' : 'text-amber-600'}`}>{totalPoints.toLocaleString()}</div>
@@ -410,8 +410,8 @@ export const QuizModal = () => {
                   ))}
                 </div>
 
-                <div className="flex-1 overflow-y-auto custom-scrollbar p-6">
-                  <motion.div key={activeTab} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} className="grid grid-cols-5 sm:grid-cols-5 md:grid-cols-8 gap-3 sm:gap-4 max-w-4xl mx-auto">
+                <div className="flex-1 overflow-y-auto custom-scrollbar p-3 sm:p-6">
+                  <motion.div key={activeTab} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} className="grid grid-cols-5 sm:grid-cols-5 md:grid-cols-8 gap-2 sm:gap-3 md:gap-4 max-w-4xl mx-auto">
                     {getLevelsForTab().map((lvl) => ( <LevelCard key={lvl.id} levelId={lvl.id} data={lvl.data} /> ))}
                   </motion.div>
                 </div>
@@ -438,9 +438,9 @@ export const QuizModal = () => {
                   </div>
                 </div>
 
-                <div className="flex-1 overflow-y-auto custom-scrollbar p-6">
-                  <div className="max-w-3xl mx-auto space-y-6">
-                    <h3 className={`text-lg sm:text-xl font-bold leading-relaxed ${isDark ? 'text-white' : 'text-slate-800'}`}>{activeQuestion.question[lang]}</h3>
+                <div className="flex-1 overflow-y-auto custom-scrollbar p-4 sm:p-6">
+                  <div className="max-w-3xl mx-auto space-y-4 sm:space-y-6">
+                    <h3 className={`text-base sm:text-xl font-bold leading-relaxed ${isDark ? 'text-white' : 'text-slate-800'}`}>{activeQuestion.question[lang]}</h3>
 
                     {(activeQuestion.type === 'visual_nfa' || activeQuestion.type === 'visual_dfa') && activeQuestion.dfa && (
                       <div className={`h-[280px] w-full rounded-2xl border overflow-hidden relative ${isDark ? 'border-white/10 bg-black/40' : 'border-slate-200 bg-slate-50'}`}>
@@ -496,17 +496,17 @@ export const QuizModal = () => {
             )}
 
             {gameState === 'result' && (
-              <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="flex-1 flex flex-col overflow-y-auto custom-scrollbar p-6 sm:p-10">
+              <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="flex-1 flex flex-col overflow-y-auto custom-scrollbar p-4 sm:p-10">
                 <div className="max-w-xl mx-auto w-full space-y-8">
                   <div className="text-center space-y-4">
                     <div className="flex justify-center gap-2 mb-6">
                       {[1, 2, 3].map((star, i) => (
                         <motion.div key={star} initial={{ opacity: 0, y: 20, scale: 0.5 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ delay: i * 0.15, type: 'spring' }}>
-                          <Star className={`w-14 h-14 ${star <= resultData.stars ? (resultData.stars === 3 ? 'text-violet-500 fill-violet-500 drop-shadow-[0_0_15px_rgba(139,92,246,0.5)]' : 'text-amber-400 fill-amber-400 drop-shadow-[0_0_10px_rgba(251,191,36,0.4)]') : (isDark ? 'text-white/10 fill-white/5' : 'text-slate-200 fill-slate-100')}`} />
+                          <Star className={`w-10 h-10 sm:w-14 sm:h-14 ${star <= resultData.stars ? (resultData.stars === 3 ? 'text-violet-500 fill-violet-500 drop-shadow-[0_0_15px_rgba(139,92,246,0.5)]' : 'text-amber-400 fill-amber-400 drop-shadow-[0_0_10px_rgba(251,191,36,0.4)]') : (isDark ? 'text-white/10 fill-white/5' : 'text-slate-200 fill-slate-100')}`} />
                         </motion.div>
                       ))}
                     </div>
-                    <h2 className={`text-3xl font-black ${isDark ? 'text-white' : 'text-slate-800'}`}>Level {currentLevel} {lang === 'id' ? 'Selesai!' : 'Completed!'}</h2>
+                    <h2 className={`text-2xl sm:text-3xl font-black ${isDark ? 'text-white' : 'text-slate-800'}`}>Level {currentLevel} {lang === 'id' ? 'Selesai!' : 'Completed!'}</h2>
                     {resultData.rankUpTo && (
                       <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.5, type: 'spring' }} className={`inline-block px-4 py-2 mt-2 rounded-xl border text-sm font-black uppercase tracking-widest shadow-lg ${isDark ? 'bg-amber-500/20 border-amber-500/50 text-amber-400 shadow-amber-500/20' : 'bg-amber-100 border-amber-300 text-amber-700 shadow-amber-500/10'}`}>
                         🎉 {lang === 'id' ? 'Peringkat Naik:' : 'Rank Up:'} {resultData.rankUpTo}

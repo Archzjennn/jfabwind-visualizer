@@ -251,7 +251,9 @@ export const RegexInput = () => {
             <div
               ref={overlayRef}
               aria-hidden="true"
-              className={`absolute inset-0 w-full h-full px-4 py-3.5 md:px-5 md:py-4 rounded-xl border-2 border-transparent text-base md:text-xl tracking-wider font-mono overflow-hidden whitespace-pre pointer-events-none transition-all flex items-center ${
+              className={`absolute inset-0 w-full h-full px-4 py-3.5 md:px-5 md:py-4 rounded-xl border-2 border-transparent text-base md:text-xl tracking-wider font-mono pointer-events-none transition-all flex items-center ${
+                input ? 'overflow-hidden whitespace-pre' : 'overflow-visible whitespace-normal'
+              } ${
                 isDark ? 'bg-black/40' : 'bg-slate-50'
               }`}
             >
