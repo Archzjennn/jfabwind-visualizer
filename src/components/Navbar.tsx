@@ -43,9 +43,6 @@ export const Navbar = () => {
               <span className={`text-[8px] tracking-[0.2em] uppercase font-bold hidden sm:block ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>
                 Joint Finite Automata Builder With Interactive NFA/DFA
               </span>
-              <span className={`text-[8px] tracking-[0.2em] uppercase font-bold sm:hidden ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>
-                Visualizer
-              </span>
             </div>
           </div>
           
@@ -132,6 +129,16 @@ export const Navbar = () => {
               isDark ? 'text-amber-400 hover:bg-amber-500/10' : 'text-indigo-600 hover:bg-indigo-500/10'
             }`}>
               {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
+
+            <button
+              onClick={() => window.dispatchEvent(new Event('open-settings'))}
+              className={`p-2 rounded-lg transition-all ${
+                isDark ? 'text-slate-400 hover:text-white hover:bg-white/5' : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100'
+              }`}
+              title={lang === 'id' ? 'Pengaturan' : 'Settings'}
+            >
+              <Settings className="w-4 h-4" />
             </button>
 
             <button 
