@@ -27,17 +27,21 @@ export const Navbar = () => {
     } backdrop-blur-xl`}>
       <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo / Brand */}
+          {/* Logo / Brand (Tetap Asli) */}
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-violet-600 to-fuchsia-600 flex items-center justify-center text-white font-black text-lg shadow-lg shadow-violet-500/30">
-              J
+              <img 
+                src="/LogoJFABWIND.png" 
+                alt="JFABWIND Logo" 
+                className="w-full h-full object-contain drop-shadow-sm" 
+              />
             </div>
             <span className={`font-black text-lg tracking-wider bg-clip-text text-transparent bg-gradient-to-r ${isDark ? 'from-white to-slate-400' : 'from-slate-900 to-slate-700'}`}>
               JFABWIND
             </span>
           </div>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation (Tidak Ada Yang Diubah) */}
           <div className="hidden md:flex items-center gap-2">
             <button 
               id="tour-edu-btn"
@@ -145,7 +149,7 @@ export const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
+      {/* Mobile Menu Dropdown (Regex Builder & Shortcuts Dihapus dari Grid) */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div 
@@ -172,11 +176,6 @@ export const Navbar = () => {
               <button onClick={() => { toggleGlossary(); setIsMobileMenuOpen(false); }} className={`flex flex-col items-center justify-center p-3 rounded-xl gap-1 transition-colors ${isDark ? 'text-slate-400 hover:text-white hover:bg-white/5' : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100'}`}>
                 <BookText className="w-5 h-5" />
                 <span className="text-[10px] font-medium">Glossary</span>
-              </button>
-
-              <button onClick={() => { toggleShortcuts(); setIsMobileMenuOpen(false); }} className={`flex flex-col items-center justify-center p-3 rounded-xl gap-1 transition-colors ${isDark ? 'text-slate-400 hover:text-white hover:bg-white/5' : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100'}`}>
-                <Keyboard className="w-5 h-5" />
-                <span className="text-[10px] font-medium">Shortcuts</span>
               </button>
 
               <button onClick={() => { setRunTour(true); setIsMobileMenuOpen(false); }} className={`flex flex-col items-center justify-center p-3 rounded-xl gap-1 transition-colors ${isDark ? 'text-slate-400 hover:text-white hover:bg-white/5' : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100'}`}>

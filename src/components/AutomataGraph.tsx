@@ -347,7 +347,9 @@ export const AutomataGraph = memo(({ automaton, title }: Props) => {
   };
 
   const containerClasses = isMaximized 
-    ? `fixed inset-0 z-[100] flex flex-col m-0 p-4 sm:p-8 ${isDark ? 'bg-[#080810]/95 backdrop-blur-2xl' : 'bg-slate-50/95 backdrop-blur-2xl'}` 
+    ? `fixed inset-0 z-[9999] flex flex-col m-0 p-4 sm:p-8 ${
+        isDark ? 'bg-[#080810]/95 backdrop-blur-2xl' : 'bg-slate-50/95 backdrop-blur-2xl'
+      } portrait:max-sm:w-[100vh] portrait:max-sm:h-[100vw] portrait:max-sm:top-1/2 portrait:max-sm:left-1/2 portrait:max-sm:-translate-x-1/2 portrait:max-sm:-translate-y-1/2 portrait:max-sm:rotate-90` 
     : `rounded-2xl overflow-hidden flex flex-col h-[450px] border backdrop-blur-xl ${isDark ? 'bg-white/2 border-white/5 shadow-xl shadow-black/50' : 'bg-white/80 border-slate-200 shadow-lg'}`;
 
   return (
