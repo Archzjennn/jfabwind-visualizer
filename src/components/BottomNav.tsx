@@ -18,7 +18,7 @@ export const BottomNav = () => {
   };
 
   return (
-    <div className={`md:hidden fixed bottom-0 left-0 w-full z-50 border-t pb-safe transition-colors duration-300 ${
+    <div data-bottomnav className={`md:hidden fixed bottom-0 left-0 w-full z-50 border-t pb-safe transition-colors duration-300 ${
       isDark ? 'bg-[#080810]/95 border-white/10 backdrop-blur-xl' : 'bg-white/95 border-slate-200 backdrop-blur-xl'
     }`}>
       <div className="flex items-center justify-around p-2">

@@ -184,3 +184,13 @@ html:not(.dark) .driver-popover-prev-btn {
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background-color: rgb(var(--accent-500) / 0.6);
 }
+
+/* =========================================
+   GRAPH FULLSCREEN MODE
+   ========================================= */
+body.graph-fullscreen-active nav {
+  display: none !important;
+}
+body.graph-fullscreen-active [data-bottomnav] {
+  display: none !important;
+}

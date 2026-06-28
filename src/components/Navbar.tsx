@@ -17,7 +17,6 @@ export const Navbar = () => {
   
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const t = lang === 'id' ? id : en;
   const isDark = theme === 'dark';
 
@@ -25,178 +24,190 @@ export const Navbar = () => {
     <nav className={`sticky top-0 z-50 w-full transition-all duration-300 border-b ${
       isDark ? 'bg-[#080810]/80 border-white/5 shadow-2xl shadow-purple-500/5' : 'bg-white/80 border-slate-200 shadow-sm'
     } backdrop-blur-xl`}>
-      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo / Brand (Tetap Asli) */}
-          <div className="flex items-center gap-2 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-violet-600 to-fuchsia-600 flex items-center justify-center text-white font-black text-lg shadow-lg shadow-violet-500/30">
+          
+          <div className="flex items-center gap-3 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+            <div className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 rounded-xl overflow-hidden flex items-center justify-center">
               <img 
                 src="/LogoJFABWIND.png" 
                 alt="JFABWIND Logo" 
                 className="w-full h-full object-contain drop-shadow-sm" 
               />
             </div>
-            <span className={`font-black text-lg tracking-wider bg-clip-text text-transparent bg-gradient-to-r ${isDark ? 'from-white to-slate-400' : 'from-slate-900 to-slate-700'}`}>
-              JFABWIND
-            </span>
+            
+            <div className="flex flex-col leading-tight">
+              <span className={`font-black text-sm tracking-[0.15em] ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                JFABWIND
+              </span>
+              <span className={`text-[8px] tracking-[0.2em] uppercase font-bold hidden sm:block ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>
+                Joint Finite Automata Builder With Interactive NFA/DFA
+              </span>
+              <span className={`text-[8px] tracking-[0.2em] uppercase font-bold sm:hidden ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>
+                Visualizer
+              </span>
+            </div>
+          </div>
+          
+          <div className="hidden lg:flex items-center gap-1 sm:gap-2">
+            <button id="tour-quiz-btn" onClick={toggleQuiz} className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+              isDark ? 'text-slate-400 hover:text-white hover:bg-white/5 border border-transparent' : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100 border border-transparent'
+            }`}>
+              <Target className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Quiz</span>
+            </button>
+
+            <button id="tour-glossary-btn" onClick={toggleGlossary} className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+              isDark ? 'text-slate-400 hover:text-white hover:bg-white/5 border border-transparent' : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100 border border-transparent'
+            }`}>
+              <BookText className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">{lang === 'id' ? 'Kamus' : 'Glossary'}</span>
+            </button>
+
+            <button onClick={toggleAbout} className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+              isDark ? 'text-slate-400 hover:text-white hover:bg-white/5 border border-transparent' : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100 border border-transparent'
+            }`}>
+              <Info className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">{t.about}</span>
+            </button>
+
+            <button id="tour-builder-btn" onClick={toggleBuilder} className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-bold transition-all shadow-lg ${
+              isDark ? 'bg-violet-500/10 text-violet-400 border border-violet-500/20 hover:bg-violet-500/20 shadow-violet-500/5' : 'bg-violet-50 text-violet-600 border border-violet-100 hover:bg-violet-100'
+            }`}>
+              <Blocks className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Builder</span>
+            </button>
+
+            <button id="tour-edu-btn" onClick={toggleEduMode} className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+              isEduMode 
+                ? 'bg-amber-500 text-white shadow-lg shadow-amber-500/20' 
+                : (isDark ? 'text-slate-400 hover:text-white hover:bg-white/5' : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100')
+            }`}>
+              <GraduationCap className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">{t.eduMode}</span>
+            </button>
+            
+            <div className={`w-px h-6 mx-1 ${isDark ? 'bg-white/5' : 'bg-slate-200'}`}></div>
+            
+            <div id="tour-controls" className="flex items-center gap-1 sm:gap-1.5">
+              <button onClick={() => setRunTour(true)} className={`p-2 rounded-lg transition-colors ${
+                isDark ? 'text-slate-500 hover:text-white hover:bg-white/5' : 'text-slate-400 hover:text-slate-900 hover:bg-slate-100'
+              }`}>
+                <HelpCircle className="w-4 h-4" />
+              </button>
+
+              <button onClick={toggleLang} className={`flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-[10px] font-black tracking-widest transition-all border ${
+                isDark ? 'text-slate-400 hover:text-white border-white/5 hover:bg-white/5' : 'text-slate-500 hover:text-slate-900 border-slate-200 hover:bg-slate-100'
+              }`}>
+                <Languages className="w-3.5 h-3.5" />
+                {lang.toUpperCase()}
+              </button>
+
+              <button onClick={toggleShortcuts} className={`p-2 rounded-lg transition-colors ${
+                isDark ? 'text-slate-500 hover:text-white hover:bg-white/5' : 'text-slate-400 hover:text-slate-900 hover:bg-slate-100'
+              }`}>
+                <Keyboard className="w-4 h-4" />
+              </button>
+              
+              <button onClick={toggleTheme} className={`p-2 rounded-lg transition-all transform active:scale-90 ${
+                isDark ? 'text-amber-400 hover:bg-amber-500/10' : 'text-indigo-600 hover:bg-indigo-500/10'
+              }`}>
+                {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+              </button>
+
+              <button
+                onClick={() => window.dispatchEvent(new Event('open-settings'))}
+                className={`p-2 rounded-lg transition-all ${
+                  isDark ? 'text-slate-500 hover:text-white hover:bg-white/5' : 'text-slate-400 hover:text-slate-900 hover:bg-slate-100'
+                }`}
+                title={lang === 'id' ? 'Pengaturan' : 'Settings'}
+              >
+                <Settings className="w-4 h-4" />
+              </button>
+            </div>
           </div>
 
-          {/* Desktop Navigation (Tidak Ada Yang Diubah) */}
-          <div className="hidden md:flex items-center gap-2">
-            <button 
-              id="tour-edu-btn"
-              onClick={toggleEduMode} 
-              className={`p-2.5 rounded-xl transition-all flex items-center gap-2 border ${
-                isEduMode 
-                  ? (isDark ? 'bg-violet-500/10 border-violet-500/30 text-violet-400' : 'bg-violet-50 border-violet-200 text-violet-600') 
-                  : (isDark ? 'border-transparent text-slate-400 hover:text-white hover:bg-white/5' : 'border-transparent text-slate-600 hover:text-slate-900 hover:bg-slate-100')
-              }`}
-              title={lang === 'id' ? 'Mode Edukasi' : 'Education Mode'}
-            >
-              <GraduationCap className="w-5 h-5" />
+          <div className="lg:hidden flex items-center gap-1.5">
+            <button onClick={toggleTheme} className={`p-2 rounded-lg transition-all transform active:scale-90 ${
+              isDark ? 'text-amber-400 hover:bg-amber-500/10' : 'text-indigo-600 hover:bg-indigo-500/10'
+            }`}>
+              {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </button>
 
-            <button 
-              onClick={toggleBuilder} 
-              className={`p-2.5 rounded-xl transition-all border border-transparent ${isDark ? 'text-slate-400 hover:text-white hover:bg-white/5' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'}`}
-              title="Regex Builder"
-            >
-              <Blocks className="w-5 h-5" />
-            </button>
-
-            <button 
-              onClick={toggleQuiz} 
-              className={`p-2.5 rounded-xl transition-all border border-transparent ${isDark ? 'text-slate-400 hover:text-white hover:bg-white/5' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'}`}
-              title="Quiz Tournament"
-            >
-              <Target className="w-5 h-5" />
-            </button>
-
-            <button 
-              id="tour-glossary-btn"
-              onClick={toggleGlossary} 
-              className={`p-2.5 rounded-xl transition-all border border-transparent ${isDark ? 'text-slate-400 hover:text-white hover:bg-white/5' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'}`}
-              title="Glossary"
-            >
-              <BookText className="w-5 h-5" />
-            </button>
-
-            <button 
-              onClick={toggleShortcuts} 
-              className={`p-2.5 rounded-xl transition-all border border-transparent ${isDark ? 'text-slate-400 hover:text-white hover:bg-white/5' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'}`}
-              title="Keyboard Shortcuts"
-            >
-              <Keyboard className="w-5 h-5" />
-            </button>
-
-            <div className={`w-[1px] h-5 mx-1 ${isDark ? 'bg-white/10' : 'bg-slate-200'}`} />
-
-            <button 
-              onClick={() => setRunTour(true)} 
-              className={`p-2.5 rounded-xl transition-all border border-transparent ${isDark ? 'text-slate-400 hover:text-white hover:bg-white/5' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'}`}
-              title="Onboarding Tour"
-            >
-              <HelpCircle className="w-5 h-5" />
-            </button>
-
-            <button 
-              onClick={toggleLang} 
-              className={`px-3 py-1.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all border ${isDark ? 'border-white/10 text-slate-300 hover:bg-white/5' : 'border-slate-200 text-slate-700 hover:bg-slate-100'}`}
-            >
-              {lang}
-            </button>
-
-            <button 
-              onClick={toggleTheme} 
-              className={`p-2.5 rounded-xl transition-all border border-transparent ${isDark ? 'text-slate-400 hover:text-white hover:bg-white/5' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'}`}
-            >
-              {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-            </button>
-
-            <button 
-              onClick={toggleAbout} 
-              className={`p-2.5 rounded-xl transition-all border border-transparent ${isDark ? 'text-slate-400 hover:text-white hover:bg-white/5' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'}`}
-              title="About Us"
-            >
-              <Info className="w-5 h-5" />
-            </button>
-
-            <button 
-              id="tour-controls"
-              onClick={() => window.dispatchEvent(new Event('open-settings'))} 
-              className={`p-2.5 rounded-xl transition-all border border-transparent ${isDark ? 'text-slate-400 hover:text-white hover:bg-white/5' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'}`}
-              title="Settings"
-            >
-              <Settings className="w-5 h-5" />
-            </button>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className="flex md:hidden items-center gap-2">
-            <button 
-              onClick={toggleTheme} 
-              className={`p-2.5 rounded-xl transition-all ${isDark ? 'text-slate-400' : 'text-slate-600'}`}
-            >
-              {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-            </button>
             <button 
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`p-2.5 rounded-xl transition-all border ${isDark ? 'border-white/10 text-white hover:bg-white/5' : 'border-slate-200 text-slate-900 hover:bg-slate-100'}`}
+              className={`p-2 rounded-xl transition-all ${
+                isDark ? 'text-slate-400 hover:text-white hover:bg-white/5' : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100'
+              }`}
             >
               {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
+
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown (Regex Builder & Shortcuts Dihapus dari Grid) */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div 
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className={`md:hidden overflow-hidden border-t ${isDark ? 'bg-[#080810]/95 border-white/5' : 'bg-white/95 border-slate-200'}`}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
+            className={`lg:hidden w-full border-t overflow-hidden backdrop-blur-2xl ${
+              isDark ? 'bg-[#080810]/95 border-white/5 shadow-2xl' : 'bg-white/95 border-slate-200 shadow-lg'
+            }`}
           >
-            <div className="grid grid-cols-3 gap-2 p-4 max-h-[70vh] overflow-y-auto">
-              <button onClick={() => { toggleEduMode(); setIsMobileMenuOpen(false); }} className={`flex flex-col items-center justify-center p-3 rounded-xl gap-1 border transition-colors ${
-                isEduMode 
-                  ? (isDark ? 'bg-violet-500/10 border-violet-500/30 text-violet-400' : 'bg-violet-50 border-violet-200 text-violet-600')
-                  : (isDark ? 'text-slate-400 border-transparent hover:bg-white/5' : 'text-slate-600 border-transparent hover:bg-slate-100')
+            <div className="p-4 flex flex-col gap-2 max-h-[calc(100vh-5rem)] overflow-y-auto">
+              
+              <button onClick={() => { toggleQuiz(); setIsMobileMenuOpen(false); }} className={`flex items-center gap-3 w-full px-4 py-3 rounded-xl text-xs font-bold transition-all ${
+                isDark ? 'text-slate-300 hover:text-white hover:bg-white/5' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
               }`}>
-                <GraduationCap className="w-5 h-5" />
-                <span className="text-[10px] font-medium">Edu Mode</span>
+                <Target className="w-4 h-4 text-violet-500" />
+                <span>Quiz</span>
               </button>
 
-              <button onClick={() => { toggleQuiz(); setIsMobileMenuOpen(false); }} className={`flex flex-col items-center justify-center p-3 rounded-xl gap-1 transition-colors ${isDark ? 'text-slate-400 hover:text-white hover:bg-white/5' : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100'}`}>
-                <Target className="w-5 h-5" />
-                <span className="text-[10px] font-medium">Quiz</span>
+              <button onClick={() => { toggleGlossary(); setIsMobileMenuOpen(false); }} className={`flex items-center gap-3 w-full px-4 py-3 rounded-xl text-xs font-bold transition-all ${
+                isDark ? 'text-slate-300 hover:text-white hover:bg-white/5' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+              }`}>
+                <BookText className="w-4 h-4 text-violet-500" />
+                <span>{lang === 'id' ? 'Kamus (Glosarium)' : 'Glossary'}</span>
               </button>
 
-              <button onClick={() => { toggleGlossary(); setIsMobileMenuOpen(false); }} className={`flex flex-col items-center justify-center p-3 rounded-xl gap-1 transition-colors ${isDark ? 'text-slate-400 hover:text-white hover:bg-white/5' : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100'}`}>
-                <BookText className="w-5 h-5" />
-                <span className="text-[10px] font-medium">Glossary</span>
+              <button onClick={() => { toggleAbout(); setIsMobileMenuOpen(false); }} className={`flex items-center gap-3 w-full px-4 py-3 rounded-xl text-xs font-bold transition-all ${
+                isDark ? 'text-slate-300 hover:text-white hover:bg-white/5' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+              }`}>
+                <Info className="w-4 h-4 text-violet-500" />
+                <span>{t.about}</span>
               </button>
 
-              <button onClick={() => { setRunTour(true); setIsMobileMenuOpen(false); }} className={`flex flex-col items-center justify-center p-3 rounded-xl gap-1 transition-colors ${isDark ? 'text-slate-400 hover:text-white hover:bg-white/5' : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100'}`}>
-                <HelpCircle className="w-5 h-5" />
-                <span className="text-[10px] font-medium">Tour</span>
+              <button onClick={() => { toggleEduMode(); setIsMobileMenuOpen(false); }} className={`flex items-center gap-3 w-full px-4 py-3 rounded-xl text-xs font-bold transition-all ${
+                isEduMode 
+                  ? 'bg-amber-500 text-white shadow-md' 
+                  : (isDark ? 'text-slate-300 hover:text-white hover:bg-white/5' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100')
+              }`}>
+                <GraduationCap className="w-4 h-4" />
+                <span>{t.eduMode}</span>
               </button>
 
-              <button onClick={() => { toggleLang(); }} className={`flex flex-col items-center justify-center p-3 rounded-xl gap-1 transition-colors border ${isDark ? 'text-slate-400 border-white/5 hover:bg-white/5' : 'text-slate-500 border-slate-200 hover:bg-slate-100'}`}>
-                <Languages className="w-5 h-5" />
-                <span className="text-[10px] font-black">{lang.toUpperCase()}</span>
-              </button>
+              <div className={`h-px w-full my-2 ${isDark ? 'bg-white/5' : 'bg-slate-200'}`}></div>
 
-              <button onClick={() => { toggleAbout(); setIsMobileMenuOpen(false); }} className={`flex flex-col items-center justify-center p-3 rounded-xl gap-1 transition-colors ${isDark ? 'text-slate-400 hover:text-white hover:bg-white/5' : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100'}`}>
-                <Info className="w-5 h-5" />
-                <span className="text-[10px] font-medium">About</span>
-              </button>
+              <div className="grid grid-cols-2 gap-2 pt-1 pb-2">
+                <button onClick={() => { setRunTour(true); setIsMobileMenuOpen(false); }} className={`flex flex-col items-center justify-center p-3 rounded-xl gap-1 transition-colors ${
+                  isDark ? 'text-slate-400 hover:text-white hover:bg-white/5' : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100'
+                }`}>
+                  <HelpCircle className="w-4 h-4" />
+                  <span className="text-[9px] font-medium">Tour</span>
+                </button>
 
-              <button onClick={() => { window.dispatchEvent(new Event('open-settings')); setIsMobileMenuOpen(false); }} className={`flex flex-col items-center justify-center p-3 rounded-xl gap-1 transition-colors ${isDark ? 'text-slate-400 hover:text-white hover:bg-white/5' : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100'}`}>
-                <Settings className="w-5 h-5" />
-                <span className="text-[10px] font-medium">Settings</span>
-              </button>
+                <button onClick={() => { toggleLang(); }} className={`flex flex-col items-center justify-center p-3 rounded-xl gap-1 transition-colors border ${
+                  isDark ? 'text-slate-400 border-white/5 hover:bg-white/5' : 'text-slate-500 border-slate-200 hover:bg-slate-100'
+                }`}>
+                  <Languages className="w-4 h-4" />
+                  <span className="text-[9px] font-black">{lang.toUpperCase()}</span>
+                </button>
+              </div>
+
             </div>
           </motion.div>
         )}
